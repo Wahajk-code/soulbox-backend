@@ -20,6 +20,13 @@ app.use(
 app.use(express.json());
 app.use("/api", apiRoutes);
 
+// Health check / root route
+app.get("/", (req, res) => {
+  res.json({ ok: true, message: "SoulBox backend is running" });
+});
+
+module.exports = app;
+
 // ❌ Don't call app.listen() here
 // ✅ Just export app for Vercel
 module.exports = app;
