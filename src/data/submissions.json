@@ -416,5 +416,56 @@
       "label": "Belong",
       "rule_fired": "Baseline"
     }
+  },
+  {
+    "desire": {
+      "genre_calling": "Sci-Fi",
+      "genre_flavour": "Space Opera",
+      "tone": "Light",
+      "pacing": "Fast",
+      "literary_depth": "Commercial",
+      "plot_bias": "External",
+      "sensitivity": "Unflinching"
+    },
+    "cultural_lens": {
+      "axis_tradition_change": "Tradition",
+      "whose_story": "Passed down",
+      "protagonist_lens": "Male",
+      "aggregate": "Tradition"
+    },
+    "soul_climate": {
+      "temperature_primary": {
+        "tag": "Searching"
+      },
+      "temperature_secondary": {
+        "whisper_text": "I seek truth"
+      },
+      "posture": {
+        "path": {
+          "q9a": "People-Pleasing",
+          "q9b": "Stewarding"
+        },
+        "final": "People-Pleasing"
+      }
+    },
+    "yearning": {
+      "cluster_image": "Love / Belong / Seen / Worthy",
+      "final": "To be loved"
+    },
+    "reader_context": {
+      "favourite_books": "wadawd",
+      "themes_issues": "awdwad",
+      "heavy_triggers": "Death"
+    },
+    "email": "wahajtest@gmail.com",
+    "name": "awdaw",
+    "country": "US",
+    "region": "US",
+    "submitted_at": "2025-09-30T20:59:27.782Z",
+    "arc": {
+      "system": "Confronting the Shadow",
+      "label": "Confronting the Shadow",
+      "rule_fired": "Rule 1 — Internal Barrier"
+    }
   }
 ]
