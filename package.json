@@ -8,10 +8,13 @@
     "dev": "nodemon src/index.js"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "node-fetch": "^2.6.7"
+    "googleapis": "^161.0.0",
+    "node-fetch": "^2.6.7",
+    "stripe": "^19.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
