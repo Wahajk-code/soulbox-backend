@@ -1,35 +1,80 @@
-const fs = require("fs").promises;
-const path = require("path");
+const { google } = require("googleapis");
+const sheets = google.sheets("v4");
 
-const submissionsFile = path.join(__dirname, "../data/submissions.json");
+// Authenticate with Service Account
+const auth = new google.auth.GoogleAuth({
+  credentials: {
+    client_email: process.env.GOOGLE_CLIENT_EMAIL,
+    private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+  },
+  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+});
+
+// Flatten nested objects (e.g., { desire: { genre_calling: 'Fantasy' } } → { 'desire.genre_calling': 'Fantasy' })
+function flattenObject(obj, prefix = "") {
+  const flat = {};
+  for (const [key, value] of Object.entries(obj || {})) {
+    const newKey = prefix ? `${prefix}.${key}` : key;
+    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+      Object.assign(flat, flattenObject(value, newKey));
+    } else {
+      flat[newKey] = Array.isArray(value) ? value.join(", ") : value;
+    }
+  }
+  return flat;
+}
 
 async function saveSubmission(submission) {
   try {
-    let submissions = [];
-    try {
-      const data = await fs.readFile(submissionsFile, "utf8");
-      if (data.trim()) {
-        // Check if file is not empty
-        submissions = JSON.parse(data);
-        if (!Array.isArray(submissions)) {
-          console.warn("submissions.json is not an array, resetting to []");
-          submissions = [];
-        }
-      }
-    } catch (error) {
-      if (error.code === "ENOENT") {
-        console.log("submissions.json not found, creating new file");
-      } else if (error.message.includes("Unexpected end of JSON input")) {
-        console.warn("submissions.json is empty or invalid, resetting to []");
-      } else {
-        throw error;
-      }
+    const sheetsClient = await auth.getClient();
+    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    const sheetName = process.env.SHEET_NAME || "Sheet1";
+    const range = `${sheetName}!A:Z`;
+
+    // Flatten submission data
+    const flattened = flattenObject(submission);
+    const headers = Object.keys(flattened);
+    flattened.timestamp = new Date().toISOString(); // Add timestamp
+    headers.push("timestamp");
+
+    // Check if sheet has headers; add if missing
+    const existing = await sheets.spreadsheets.values
+      .get({
+        auth: sheetsClient,
+        spreadsheetId,
+        range: `${sheetName}!A1`,
+      })
+      .catch(() => null);
+
+    if (
+      !existing ||
+      !existing.data.values ||
+      existing.data.values.length === 0
+    ) {
+      await sheets.spreadsheets.values.update({
+        auth: sheetsClient,
+        spreadsheetId,
+        range: `${sheetName}!A1`,
+        valueInputOption: "RAW",
+        resource: { values: [headers] },
+      });
     }
 
-    submissions.push(submission);
-    await fs.writeFile(submissionsFile, JSON.stringify(submissions, null, 2));
+    // Append row
+    const row = headers.map((header) => flattened[header] || "");
+    await sheets.spreadsheets.values.append({
+      auth: sheetsClient,
+      spreadsheetId,
+      range,
+      valueInputOption: "RAW",
+      resource: { values: [row] },
+    });
   } catch (error) {
-    console.error("Failed to save submission:", error.message, error.stack);
+    console.error(
+      "Failed to save submission to Google Sheets:",
+      error.message,
+      error.stack
+    );
     throw new Error("Failed to save submission: " + error.message);
   }
 }
