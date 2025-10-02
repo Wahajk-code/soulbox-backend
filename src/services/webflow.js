@@ -34,21 +34,20 @@ async function getSoulReport(arcLabel) {
       throw new Error("Invalid response: items array not found");
     }
 
-    // ✅ Match slug instead of name
-   const report = data.items.find(
-  (item) =>
-    item.fieldData.arc_key &&
-    item.fieldData.arc_key.toLowerCase() === arcLabel.toLowerCase()
-);
-
+    // ✅ Match against name, since frontend uses balanced-open
+    const report = data.items.find(
+      (item) =>
+        item.fieldData.name &&
+        item.fieldData.name.toLowerCase() === arcLabel.toLowerCase()
+    );
 
     if (!report) {
       throw new Error(`No report found for arcLabel: ${arcLabel}`);
     }
 
     return {
-      arc_key: report.fieldData.slug,
-      arc_label: report.fieldData.name,
+      arc_key: report.fieldData.slug,   // optional: slug
+      arc_label: report.fieldData.name, // balanced-open
       body: report.fieldData.body,
       footer: report.fieldData.footer,
     };
