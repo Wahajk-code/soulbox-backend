@@ -11,6 +11,40 @@ mailchimp.setConfig({
   server: process.env.MAILCHIMP_API_KEY.split("-")[1], // Extracts 'us10'
 });
 
+
+router.get("/debug/cms-records", async (req, res) => {
+  try {
+    const WEBFLOW_API_KEY = process.env.WEBFLOW_API_KEY;
+    const COLLECTION_ID = process.env.WEBFLOW_COLLECTION_ID;
+    const BASE_URL = "https://api.webflow.com/v2";
+
+    const response = await fetch(
+      `${BASE_URL}/collections/${COLLECTION_ID}/items`,
+      {
+        headers: {
+          Authorization: `Bearer ${WEBFLOW_API_KEY}`,
+          "accept-version": "1.0.0",
+        },
+      }
+    );
+
+    const data = await response.json();
+    res.json({
+      ok: true,
+      items: data.items.map((item) => ({
+        arc_key: item.fieldData.arc_key,
+        arc_label: item.fieldData.arc_label,
+        slug: item.fieldData.slug,
+        name: item.fieldData.name,
+      })),
+    });
+  } catch (err) {
+    res.status(500).json({ ok: false, error: err.message });
+  }
+});
+
+
+
 router.post("/submit", async (req, res) => {
   try {
     const submission = req.body;
