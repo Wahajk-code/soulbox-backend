@@ -35,11 +35,12 @@ async function getSoulReport(arcLabel) {
     }
 
     // ✅ Match slug instead of name
-    const report = data.items.find(
-      (item) =>
-        item.fieldData.slug &&
-        item.fieldData.slug.toLowerCase() === arcLabel.toLowerCase()
-    );
+   const report = data.items.find(
+  (item) =>
+    item.fieldData.arc_key &&
+    item.fieldData.arc_key.toLowerCase() === arcLabel.toLowerCase()
+);
+
 
     if (!report) {
       throw new Error(`No report found for arcLabel: ${arcLabel}`);
