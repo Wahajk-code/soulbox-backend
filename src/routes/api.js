@@ -5,7 +5,7 @@ const webflowService = require("../services/webflow");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 require("dotenv").config();
-const arcMap = require("../data/arc_map.json"); // Load generated arcMap
+const arcMap = require("../../arc_map.json"); // Load generated arcMap
 
 // Configure Mailchimp
 mailchimp.setConfig({
