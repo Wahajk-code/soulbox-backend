@@ -4,6 +4,8 @@ const submissionService = require("../services/submission");
 const webflowService = require("../services/webflow");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const mailchimp = require("@mailchimp/mailchimp_marketing");
+require("dotenv").config();
+const arcMap = require("../data/arc_map.json"); // Load generated arcMap
 
 // Configure Mailchimp
 mailchimp.setConfig({
@@ -11,39 +13,38 @@ mailchimp.setConfig({
   server: process.env.MAILCHIMP_API_KEY.split("-")[1], // Extracts 'us10'
 });
 
-
-router.get("/debug/cms-records", async (req, res) => {
+// Calculate arc based on temperature, posture, and yearning
+router.post("/calculate-arc", async (req, res) => {
   try {
-    const WEBFLOW_API_KEY = process.env.WEBFLOW_API_KEY;
-    const COLLECTION_ID = process.env.WEBFLOW_COLLECTION_ID;
-    const BASE_URL = "https://api.webflow.com/v2";
+    const { temperature, posture, yearning } = req.body;
+    console.log(`[API] Calculating arc: ${temperature}-${posture}-${yearning}`);
 
-    const response = await fetch(
-      `${BASE_URL}/collections/${COLLECTION_ID}/items`,
-      {
-        headers: {
-          Authorization: `Bearer ${WEBFLOW_API_KEY}`,
-          "accept-version": "1.0.0",
-        },
-      }
-    );
+    if (!temperature || !posture || !yearning) {
+      console.error("[API] Missing required fields", {
+        temperature,
+        posture,
+        yearning,
+      });
+      return res
+        .status(400)
+        .json({
+          ok: false,
+          error: "Missing required fields: temperature, posture, yearning",
+        });
+    }
 
-    const data = await response.json();
-    res.json({
-      ok: true,
-      items: data.items.map((item) => ({
-        arc_key: item.fieldData.arc_key,
-        arc_label: item.fieldData.arc_label,
-        slug: item.fieldData.slug,
-        name: item.fieldData.name,
-      })),
-    });
-  } catch (err) {
-    res.status(500).json({ ok: false, error: err.message });
+    const key = `${temperature}-${posture}-${yearning}`;
+    const arc = arcMap[key] || arcMap.default;
+    console.log("[API] Arc calculated", { key, arc });
+
+    res.json(arc);
+  } catch (error) {
+    console.error("[API] Error calculating arc:", error.message, error.stack);
+    res
+      .status(500)
+      .json({ ok: false, error: "Failed to calculate arc: " + error.message });
   }
 });
-
-
 
 router.post("/submit", async (req, res) => {
   try {
