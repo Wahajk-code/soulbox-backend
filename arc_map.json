@@ -1,0 +1,1582 @@
+{
+  "default": {
+    "system": "balanced-open",
+    "label": "Balance and Openness",
+    "rule_fired": "default"
+  },
+  "Searching-Assertive-To be free": {
+    "system": "searching-to-be-free-assertive",
+    "label": "Assertive Searching be free",
+    "rule_fired": "searching_assertive_to_be_free"
+  },
+  "Searching-Assertive-To belong": {
+    "system": "searching-to-belong-assertive",
+    "label": "Assertive Searching belong",
+    "rule_fired": "searching_assertive_to_belong"
+  },
+  "Searching-Assertive-To understand": {
+    "system": "searching-to-understand-assertive",
+    "label": "Assertive Searching understand",
+    "rule_fired": "searching_assertive_to_understand"
+  },
+  "Searching-Assertive-To change": {
+    "system": "searching-to-change-assertive",
+    "label": "Assertive Searching change",
+    "rule_fired": "searching_assertive_to_change"
+  },
+  "Searching-Assertive-To be seen": {
+    "system": "searching-to-be-seen-assertive",
+    "label": "Assertive Searching be seen",
+    "rule_fired": "searching_assertive_to_be_seen"
+  },
+  "Searching-Stewarding-To be free": {
+    "system": "searching-to-be-free-stewarding",
+    "label": "Stewarding Searching be free",
+    "rule_fired": "searching_stewarding_to_be_free"
+  },
+  "Searching-Stewarding-To belong": {
+    "system": "searching-to-belong-stewarding",
+    "label": "Stewarding Searching belong",
+    "rule_fired": "searching_stewarding_to_belong"
+  },
+  "Searching-Stewarding-To understand": {
+    "system": "searching-to-understand-stewarding",
+    "label": "Stewarding Searching understand",
+    "rule_fired": "searching_stewarding_to_understand"
+  },
+  "Searching-Stewarding-To change": {
+    "system": "searching-to-change-stewarding",
+    "label": "Stewarding Searching change",
+    "rule_fired": "searching_stewarding_to_change"
+  },
+  "Searching-Stewarding-To be seen": {
+    "system": "searching-to-be-seen-stewarding",
+    "label": "Stewarding Searching be seen",
+    "rule_fired": "searching_stewarding_to_be_seen"
+  },
+  "Searching-Reflective-To be free": {
+    "system": "searching-to-be-free-reflective",
+    "label": "Reflective Searching be free",
+    "rule_fired": "searching_reflective_to_be_free"
+  },
+  "Searching-Reflective-To belong": {
+    "system": "searching-to-belong-reflective",
+    "label": "Reflective Searching belong",
+    "rule_fired": "searching_reflective_to_belong"
+  },
+  "Searching-Reflective-To understand": {
+    "system": "searching-to-understand-reflective",
+    "label": "Reflective Searching understand",
+    "rule_fired": "searching_reflective_to_understand"
+  },
+  "Searching-Reflective-To change": {
+    "system": "searching-to-change-reflective",
+    "label": "Reflective Searching change",
+    "rule_fired": "searching_reflective_to_change"
+  },
+  "Searching-Reflective-To be seen": {
+    "system": "searching-to-be-seen-reflective",
+    "label": "Reflective Searching be seen",
+    "rule_fired": "searching_reflective_to_be_seen"
+  },
+  "Searching-Open-To be free": {
+    "system": "searching-to-be-free-open",
+    "label": "Open Searching be free",
+    "rule_fired": "searching_open_to_be_free"
+  },
+  "Searching-Open-To belong": {
+    "system": "searching-to-belong-open",
+    "label": "Open Searching belong",
+    "rule_fired": "searching_open_to_belong"
+  },
+  "Searching-Open-To understand": {
+    "system": "searching-to-understand-open",
+    "label": "Open Searching understand",
+    "rule_fired": "searching_open_to_understand"
+  },
+  "Searching-Open-To change": {
+    "system": "searching-to-change-open",
+    "label": "Open Searching change",
+    "rule_fired": "searching_open_to_change"
+  },
+  "Searching-Open-To be seen": {
+    "system": "searching-to-be-seen-open",
+    "label": "Open Searching be seen",
+    "rule_fired": "searching_open_to_be_seen"
+  },
+  "Searching-Guarded-To be free": {
+    "system": "searching-to-be-free-guarded",
+    "label": "Guarded Searching be free",
+    "rule_fired": "searching_guarded_to_be_free"
+  },
+  "Searching-Guarded-To belong": {
+    "system": "searching-to-belong-guarded",
+    "label": "Guarded Searching belong",
+    "rule_fired": "searching_guarded_to_belong"
+  },
+  "Searching-Guarded-To understand": {
+    "system": "searching-to-understand-guarded",
+    "label": "Guarded Searching understand",
+    "rule_fired": "searching_guarded_to_understand"
+  },
+  "Searching-Guarded-To change": {
+    "system": "searching-to-change-guarded",
+    "label": "Guarded Searching change",
+    "rule_fired": "searching_guarded_to_change"
+  },
+  "Searching-Guarded-To be seen": {
+    "system": "searching-to-be-seen-guarded",
+    "label": "Guarded Searching be seen",
+    "rule_fired": "searching_guarded_to_be_seen"
+  },
+  "Searching-Rebellious-To be free": {
+    "system": "searching-to-be-free-rebellious",
+    "label": "Rebellious Searching be free",
+    "rule_fired": "searching_rebellious_to_be_free"
+  },
+  "Searching-Rebellious-To belong": {
+    "system": "searching-to-belong-rebellious",
+    "label": "Rebellious Searching belong",
+    "rule_fired": "searching_rebellious_to_belong"
+  },
+  "Searching-Rebellious-To understand": {
+    "system": "searching-to-understand-rebellious",
+    "label": "Rebellious Searching understand",
+    "rule_fired": "searching_rebellious_to_understand"
+  },
+  "Searching-Rebellious-To change": {
+    "system": "searching-to-change-rebellious",
+    "label": "Rebellious Searching change",
+    "rule_fired": "searching_rebellious_to_change"
+  },
+  "Searching-Rebellious-To be seen": {
+    "system": "searching-to-be-seen-rebellious",
+    "label": "Rebellious Searching be seen",
+    "rule_fired": "searching_rebellious_to_be_seen"
+  },
+  "Searching-Resigned-To be free": {
+    "system": "searching-to-be-free-resigned",
+    "label": "Resigned Searching be free",
+    "rule_fired": "searching_resigned_to_be_free"
+  },
+  "Searching-Resigned-To belong": {
+    "system": "searching-to-belong-resigned",
+    "label": "Resigned Searching belong",
+    "rule_fired": "searching_resigned_to_belong"
+  },
+  "Searching-Resigned-To understand": {
+    "system": "searching-to-understand-resigned",
+    "label": "Resigned Searching understand",
+    "rule_fired": "searching_resigned_to_understand"
+  },
+  "Searching-Resigned-To change": {
+    "system": "searching-to-change-resigned",
+    "label": "Resigned Searching change",
+    "rule_fired": "searching_resigned_to_change"
+  },
+  "Searching-Resigned-To be seen": {
+    "system": "searching-to-be-seen-resigned",
+    "label": "Resigned Searching be seen",
+    "rule_fired": "searching_resigned_to_be_seen"
+  },
+  "Anxious-Assertive-To be free": {
+    "system": "anxious-to-be-free-assertive",
+    "label": "Assertive Anxious be free",
+    "rule_fired": "anxious_assertive_to_be_free"
+  },
+  "Anxious-Assertive-To belong": {
+    "system": "anxious-to-belong-assertive",
+    "label": "Assertive Anxious belong",
+    "rule_fired": "anxious_assertive_to_belong"
+  },
+  "Anxious-Assertive-To understand": {
+    "system": "anxious-to-understand-assertive",
+    "label": "Assertive Anxious understand",
+    "rule_fired": "anxious_assertive_to_understand"
+  },
+  "Anxious-Assertive-To change": {
+    "system": "resilient-leadership",
+    "label": "Resilient Leadership",
+    "rule_fired": "anxious_assertive_change"
+  },
+  "Anxious-Assertive-To be seen": {
+    "system": "anxious-to-be-seen-assertive",
+    "label": "Assertive Anxious be seen",
+    "rule_fired": "anxious_assertive_to_be_seen"
+  },
+  "Anxious-Stewarding-To be free": {
+    "system": "anxious-to-be-free-stewarding",
+    "label": "Stewarding Anxious be free",
+    "rule_fired": "anxious_stewarding_to_be_free"
+  },
+  "Anxious-Stewarding-To belong": {
+    "system": "anxious-to-belong-stewarding",
+    "label": "Stewarding Anxious belong",
+    "rule_fired": "anxious_stewarding_to_belong"
+  },
+  "Anxious-Stewarding-To understand": {
+    "system": "anxious-to-understand-stewarding",
+    "label": "Stewarding Anxious understand",
+    "rule_fired": "anxious_stewarding_to_understand"
+  },
+  "Anxious-Stewarding-To change": {
+    "system": "resilient-stewardship",
+    "label": "Resilient Stewardship",
+    "rule_fired": "anxious_stewarding_change"
+  },
+  "Anxious-Stewarding-To be seen": {
+    "system": "resilient-visibility",
+    "label": "Resilient Visibility",
+    "rule_fired": "anxious_stewarding_be_seen"
+  },
+  "Anxious-Reflective-To be free": {
+    "system": "anxious-to-be-free-reflective",
+    "label": "Reflective Anxious be free",
+    "rule_fired": "anxious_reflective_to_be_free"
+  },
+  "Anxious-Reflective-To belong": {
+    "system": "anxious-to-belong-reflective",
+    "label": "Reflective Anxious belong",
+    "rule_fired": "anxious_reflective_to_belong"
+  },
+  "Anxious-Reflective-To understand": {
+    "system": "anxious-to-understand-reflective",
+    "label": "Reflective Anxious understand",
+    "rule_fired": "anxious_reflective_to_understand"
+  },
+  "Anxious-Reflective-To change": {
+    "system": "anxious-to-change-reflective",
+    "label": "Reflective Anxious change",
+    "rule_fired": "anxious_reflective_to_change"
+  },
+  "Anxious-Reflective-To be seen": {
+    "system": "anxious-to-be-seen-reflective",
+    "label": "Reflective Anxious be seen",
+    "rule_fired": "anxious_reflective_to_be_seen"
+  },
+  "Anxious-Open-To be free": {
+    "system": "anxious-to-be-free-open",
+    "label": "Open Anxious be free",
+    "rule_fired": "anxious_open_to_be_free"
+  },
+  "Anxious-Open-To belong": {
+    "system": "anxious-to-belong-open",
+    "label": "Open Anxious belong",
+    "rule_fired": "anxious_open_to_belong"
+  },
+  "Anxious-Open-To understand": {
+    "system": "anxious-to-understand-open",
+    "label": "Open Anxious understand",
+    "rule_fired": "anxious_open_to_understand"
+  },
+  "Anxious-Open-To change": {
+    "system": "anxious-to-change-open",
+    "label": "Open Anxious change",
+    "rule_fired": "anxious_open_to_change"
+  },
+  "Anxious-Open-To be seen": {
+    "system": "anxious-to-be-seen-open",
+    "label": "Open Anxious be seen",
+    "rule_fired": "anxious_open_to_be_seen"
+  },
+  "Anxious-Guarded-To be free": {
+    "system": "anxious-to-be-free-guarded",
+    "label": "Guarded Anxious be free",
+    "rule_fired": "anxious_guarded_to_be_free"
+  },
+  "Anxious-Guarded-To belong": {
+    "system": "anxious-to-belong-guarded",
+    "label": "Guarded Anxious belong",
+    "rule_fired": "anxious_guarded_to_belong"
+  },
+  "Anxious-Guarded-To understand": {
+    "system": "anxious-to-understand-guarded",
+    "label": "Guarded Anxious understand",
+    "rule_fired": "anxious_guarded_to_understand"
+  },
+  "Anxious-Guarded-To change": {
+    "system": "anxious-to-change-guarded",
+    "label": "Guarded Anxious change",
+    "rule_fired": "anxious_guarded_to_change"
+  },
+  "Anxious-Guarded-To be seen": {
+    "system": "anxious-to-be-seen-guarded",
+    "label": "Guarded Anxious be seen",
+    "rule_fired": "anxious_guarded_to_be_seen"
+  },
+  "Anxious-Rebellious-To be free": {
+    "system": "anxious-to-be-free-rebellious",
+    "label": "Rebellious Anxious be free",
+    "rule_fired": "anxious_rebellious_to_be_free"
+  },
+  "Anxious-Rebellious-To belong": {
+    "system": "anxious-to-belong-rebellious",
+    "label": "Rebellious Anxious belong",
+    "rule_fired": "anxious_rebellious_to_belong"
+  },
+  "Anxious-Rebellious-To understand": {
+    "system": "anxious-to-understand-rebellious",
+    "label": "Rebellious Anxious understand",
+    "rule_fired": "anxious_rebellious_to_understand"
+  },
+  "Anxious-Rebellious-To change": {
+    "system": "anxious-to-change-rebellious",
+    "label": "Rebellious Anxious change",
+    "rule_fired": "anxious_rebellious_to_change"
+  },
+  "Anxious-Rebellious-To be seen": {
+    "system": "anxious-to-be-seen-rebellious",
+    "label": "Rebellious Anxious be seen",
+    "rule_fired": "anxious_rebellious_to_be_seen"
+  },
+  "Anxious-Resigned-To be free": {
+    "system": "anxious-to-be-free-resigned",
+    "label": "Resigned Anxious be free",
+    "rule_fired": "anxious_resigned_to_be_free"
+  },
+  "Anxious-Resigned-To belong": {
+    "system": "anxious-to-belong-resigned",
+    "label": "Resigned Anxious belong",
+    "rule_fired": "anxious_resigned_to_belong"
+  },
+  "Anxious-Resigned-To understand": {
+    "system": "anxious-to-understand-resigned",
+    "label": "Resigned Anxious understand",
+    "rule_fired": "anxious_resigned_to_understand"
+  },
+  "Anxious-Resigned-To change": {
+    "system": "anxious-to-change-resigned",
+    "label": "Resigned Anxious change",
+    "rule_fired": "anxious_resigned_to_change"
+  },
+  "Anxious-Resigned-To be seen": {
+    "system": "anxious-to-be-seen-resigned",
+    "label": "Resigned Anxious be seen",
+    "rule_fired": "anxious_resigned_to_be_seen"
+  },
+  "Numb-Assertive-To be free": {
+    "system": "numb-to-be-free-assertive",
+    "label": "Assertive Numb be free",
+    "rule_fired": "numb_assertive_to_be_free"
+  },
+  "Numb-Assertive-To belong": {
+    "system": "numb-to-belong-assertive",
+    "label": "Assertive Numb belong",
+    "rule_fired": "numb_assertive_to_belong"
+  },
+  "Numb-Assertive-To understand": {
+    "system": "numb-to-understand-assertive",
+    "label": "Assertive Numb understand",
+    "rule_fired": "numb_assertive_to_understand"
+  },
+  "Numb-Assertive-To change": {
+    "system": "numb-to-change-assertive",
+    "label": "Assertive Numb change",
+    "rule_fired": "numb_assertive_to_change"
+  },
+  "Numb-Assertive-To be seen": {
+    "system": "numb-to-be-seen-assertive",
+    "label": "Assertive Numb be seen",
+    "rule_fired": "numb_assertive_to_be_seen"
+  },
+  "Numb-Stewarding-To be free": {
+    "system": "numb-to-be-free-stewarding",
+    "label": "Stewarding Numb be free",
+    "rule_fired": "numb_stewarding_to_be_free"
+  },
+  "Numb-Stewarding-To belong": {
+    "system": "numb-to-belong-stewarding",
+    "label": "Stewarding Numb belong",
+    "rule_fired": "numb_stewarding_to_belong"
+  },
+  "Numb-Stewarding-To understand": {
+    "system": "numb-to-understand-stewarding",
+    "label": "Stewarding Numb understand",
+    "rule_fired": "numb_stewarding_to_understand"
+  },
+  "Numb-Stewarding-To change": {
+    "system": "numb-to-change-stewarding",
+    "label": "Stewarding Numb change",
+    "rule_fired": "numb_stewarding_to_change"
+  },
+  "Numb-Stewarding-To be seen": {
+    "system": "numb-to-be-seen-stewarding",
+    "label": "Stewarding Numb be seen",
+    "rule_fired": "numb_stewarding_to_be_seen"
+  },
+  "Numb-Reflective-To be free": {
+    "system": "numb-to-be-free-reflective",
+    "label": "Reflective Numb be free",
+    "rule_fired": "numb_reflective_to_be_free"
+  },
+  "Numb-Reflective-To belong": {
+    "system": "numb-to-belong-reflective",
+    "label": "Reflective Numb belong",
+    "rule_fired": "numb_reflective_to_belong"
+  },
+  "Numb-Reflective-To understand": {
+    "system": "numb-to-understand-reflective",
+    "label": "Reflective Numb understand",
+    "rule_fired": "numb_reflective_to_understand"
+  },
+  "Numb-Reflective-To change": {
+    "system": "numb-to-change-reflective",
+    "label": "Reflective Numb change",
+    "rule_fired": "numb_reflective_to_change"
+  },
+  "Numb-Reflective-To be seen": {
+    "system": "numb-to-be-seen-reflective",
+    "label": "Reflective Numb be seen",
+    "rule_fired": "numb_reflective_to_be_seen"
+  },
+  "Numb-Open-To be free": {
+    "system": "numb-to-be-free-open",
+    "label": "Open Numb be free",
+    "rule_fired": "numb_open_to_be_free"
+  },
+  "Numb-Open-To belong": {
+    "system": "numb-to-belong-open",
+    "label": "Open Numb belong",
+    "rule_fired": "numb_open_to_belong"
+  },
+  "Numb-Open-To understand": {
+    "system": "numb-to-understand-open",
+    "label": "Open Numb understand",
+    "rule_fired": "numb_open_to_understand"
+  },
+  "Numb-Open-To change": {
+    "system": "numb-to-change-open",
+    "label": "Open Numb change",
+    "rule_fired": "numb_open_to_change"
+  },
+  "Numb-Open-To be seen": {
+    "system": "numb-to-be-seen-open",
+    "label": "Open Numb be seen",
+    "rule_fired": "numb_open_to_be_seen"
+  },
+  "Numb-Guarded-To be free": {
+    "system": "numb-to-be-free-guarded",
+    "label": "Guarded Numb be free",
+    "rule_fired": "numb_guarded_to_be_free"
+  },
+  "Numb-Guarded-To belong": {
+    "system": "numb-to-belong-guarded",
+    "label": "Guarded Numb belong",
+    "rule_fired": "numb_guarded_to_belong"
+  },
+  "Numb-Guarded-To understand": {
+    "system": "numb-to-understand-guarded",
+    "label": "Guarded Numb understand",
+    "rule_fired": "numb_guarded_to_understand"
+  },
+  "Numb-Guarded-To change": {
+    "system": "numb-to-change-guarded",
+    "label": "Guarded Numb change",
+    "rule_fired": "numb_guarded_to_change"
+  },
+  "Numb-Guarded-To be seen": {
+    "system": "numb-to-be-seen-guarded",
+    "label": "Guarded Numb be seen",
+    "rule_fired": "numb_guarded_to_be_seen"
+  },
+  "Numb-Rebellious-To be free": {
+    "system": "numb-to-be-free-rebellious",
+    "label": "Rebellious Numb be free",
+    "rule_fired": "numb_rebellious_to_be_free"
+  },
+  "Numb-Rebellious-To belong": {
+    "system": "numb-to-belong-rebellious",
+    "label": "Rebellious Numb belong",
+    "rule_fired": "numb_rebellious_to_belong"
+  },
+  "Numb-Rebellious-To understand": {
+    "system": "numb-to-understand-rebellious",
+    "label": "Rebellious Numb understand",
+    "rule_fired": "numb_rebellious_to_understand"
+  },
+  "Numb-Rebellious-To change": {
+    "system": "numb-to-change-rebellious",
+    "label": "Rebellious Numb change",
+    "rule_fired": "numb_rebellious_to_change"
+  },
+  "Numb-Rebellious-To be seen": {
+    "system": "numb-to-be-seen-rebellious",
+    "label": "Rebellious Numb be seen",
+    "rule_fired": "numb_rebellious_to_be_seen"
+  },
+  "Numb-Resigned-To be free": {
+    "system": "numb-to-be-free-resigned",
+    "label": "Resigned Numb be free",
+    "rule_fired": "numb_resigned_to_be_free"
+  },
+  "Numb-Resigned-To belong": {
+    "system": "numb-to-belong-resigned",
+    "label": "Resigned Numb belong",
+    "rule_fired": "numb_resigned_to_belong"
+  },
+  "Numb-Resigned-To understand": {
+    "system": "numb-to-understand-resigned",
+    "label": "Resigned Numb understand",
+    "rule_fired": "numb_resigned_to_understand"
+  },
+  "Numb-Resigned-To change": {
+    "system": "numb-to-change-resigned",
+    "label": "Resigned Numb change",
+    "rule_fired": "numb_resigned_to_change"
+  },
+  "Numb-Resigned-To be seen": {
+    "system": "numb-to-be-seen-resigned",
+    "label": "Resigned Numb be seen",
+    "rule_fired": "numb_resigned_to_be_seen"
+  },
+  "Ashamed-Assertive-To be free": {
+    "system": "ashamed-to-be-free-assertive",
+    "label": "Assertive Ashamed be free",
+    "rule_fired": "ashamed_assertive_to_be_free"
+  },
+  "Ashamed-Assertive-To belong": {
+    "system": "ashamed-to-belong-assertive",
+    "label": "Assertive Ashamed belong",
+    "rule_fired": "ashamed_assertive_to_belong"
+  },
+  "Ashamed-Assertive-To understand": {
+    "system": "ashamed-to-understand-assertive",
+    "label": "Assertive Ashamed understand",
+    "rule_fired": "ashamed_assertive_to_understand"
+  },
+  "Ashamed-Assertive-To change": {
+    "system": "ashamed-to-change-assertive",
+    "label": "Assertive Ashamed change",
+    "rule_fired": "ashamed_assertive_to_change"
+  },
+  "Ashamed-Assertive-To be seen": {
+    "system": "ashamed-to-be-seen-assertive",
+    "label": "Assertive Ashamed be seen",
+    "rule_fired": "ashamed_assertive_to_be_seen"
+  },
+  "Ashamed-Stewarding-To be free": {
+    "system": "ashamed-to-be-free-stewarding",
+    "label": "Stewarding Ashamed be free",
+    "rule_fired": "ashamed_stewarding_to_be_free"
+  },
+  "Ashamed-Stewarding-To belong": {
+    "system": "ashamed-to-belong-stewarding",
+    "label": "Stewarding Ashamed belong",
+    "rule_fired": "ashamed_stewarding_to_belong"
+  },
+  "Ashamed-Stewarding-To understand": {
+    "system": "ashamed-to-understand-stewarding",
+    "label": "Stewarding Ashamed understand",
+    "rule_fired": "ashamed_stewarding_to_understand"
+  },
+  "Ashamed-Stewarding-To change": {
+    "system": "ashamed-to-change-stewarding",
+    "label": "Stewarding Ashamed change",
+    "rule_fired": "ashamed_stewarding_to_change"
+  },
+  "Ashamed-Stewarding-To be seen": {
+    "system": "ashamed-to-be-seen-stewarding",
+    "label": "Stewarding Ashamed be seen",
+    "rule_fired": "ashamed_stewarding_to_be_seen"
+  },
+  "Ashamed-Reflective-To be free": {
+    "system": "ashamed-to-be-free-reflective",
+    "label": "Reflective Ashamed be free",
+    "rule_fired": "ashamed_reflective_to_be_free"
+  },
+  "Ashamed-Reflective-To belong": {
+    "system": "ashamed-to-belong-reflective",
+    "label": "Reflective Ashamed belong",
+    "rule_fired": "ashamed_reflective_to_belong"
+  },
+  "Ashamed-Reflective-To understand": {
+    "system": "ashamed-to-understand-reflective",
+    "label": "Reflective Ashamed understand",
+    "rule_fired": "ashamed_reflective_to_understand"
+  },
+  "Ashamed-Reflective-To change": {
+    "system": "ashamed-to-change-reflective",
+    "label": "Reflective Ashamed change",
+    "rule_fired": "ashamed_reflective_to_change"
+  },
+  "Ashamed-Reflective-To be seen": {
+    "system": "ashamed-to-be-seen-reflective",
+    "label": "Reflective Ashamed be seen",
+    "rule_fired": "ashamed_reflective_to_be_seen"
+  },
+  "Ashamed-Open-To be free": {
+    "system": "ashamed-to-be-free-open",
+    "label": "Open Ashamed be free",
+    "rule_fired": "ashamed_open_to_be_free"
+  },
+  "Ashamed-Open-To belong": {
+    "system": "ashamed-to-belong-open",
+    "label": "Open Ashamed belong",
+    "rule_fired": "ashamed_open_to_belong"
+  },
+  "Ashamed-Open-To understand": {
+    "system": "ashamed-to-understand-open",
+    "label": "Open Ashamed understand",
+    "rule_fired": "ashamed_open_to_understand"
+  },
+  "Ashamed-Open-To change": {
+    "system": "ashamed-to-change-open",
+    "label": "Open Ashamed change",
+    "rule_fired": "ashamed_open_to_change"
+  },
+  "Ashamed-Open-To be seen": {
+    "system": "ashamed-to-be-seen-open",
+    "label": "Open Ashamed be seen",
+    "rule_fired": "ashamed_open_to_be_seen"
+  },
+  "Ashamed-Guarded-To be free": {
+    "system": "ashamed-to-be-free-guarded",
+    "label": "Guarded Ashamed be free",
+    "rule_fired": "ashamed_guarded_to_be_free"
+  },
+  "Ashamed-Guarded-To belong": {
+    "system": "ashamed-to-belong-guarded",
+    "label": "Guarded Ashamed belong",
+    "rule_fired": "ashamed_guarded_to_belong"
+  },
+  "Ashamed-Guarded-To understand": {
+    "system": "ashamed-to-understand-guarded",
+    "label": "Guarded Ashamed understand",
+    "rule_fired": "ashamed_guarded_to_understand"
+  },
+  "Ashamed-Guarded-To change": {
+    "system": "ashamed-to-change-guarded",
+    "label": "Guarded Ashamed change",
+    "rule_fired": "ashamed_guarded_to_change"
+  },
+  "Ashamed-Guarded-To be seen": {
+    "system": "ashamed-to-be-seen-guarded",
+    "label": "Guarded Ashamed be seen",
+    "rule_fired": "ashamed_guarded_to_be_seen"
+  },
+  "Ashamed-Rebellious-To be free": {
+    "system": "ashamed-to-be-free-rebellious",
+    "label": "Rebellious Ashamed be free",
+    "rule_fired": "ashamed_rebellious_to_be_free"
+  },
+  "Ashamed-Rebellious-To belong": {
+    "system": "ashamed-to-belong-rebellious",
+    "label": "Rebellious Ashamed belong",
+    "rule_fired": "ashamed_rebellious_to_belong"
+  },
+  "Ashamed-Rebellious-To understand": {
+    "system": "ashamed-to-understand-rebellious",
+    "label": "Rebellious Ashamed understand",
+    "rule_fired": "ashamed_rebellious_to_understand"
+  },
+  "Ashamed-Rebellious-To change": {
+    "system": "ashamed-to-change-rebellious",
+    "label": "Rebellious Ashamed change",
+    "rule_fired": "ashamed_rebellious_to_change"
+  },
+  "Ashamed-Rebellious-To be seen": {
+    "system": "ashamed-to-be-seen-rebellious",
+    "label": "Rebellious Ashamed be seen",
+    "rule_fired": "ashamed_rebellious_to_be_seen"
+  },
+  "Ashamed-Resigned-To be free": {
+    "system": "ashamed-to-be-free-resigned",
+    "label": "Resigned Ashamed be free",
+    "rule_fired": "ashamed_resigned_to_be_free"
+  },
+  "Ashamed-Resigned-To belong": {
+    "system": "ashamed-to-belong-resigned",
+    "label": "Resigned Ashamed belong",
+    "rule_fired": "ashamed_resigned_to_belong"
+  },
+  "Ashamed-Resigned-To understand": {
+    "system": "ashamed-to-understand-resigned",
+    "label": "Resigned Ashamed understand",
+    "rule_fired": "ashamed_resigned_to_understand"
+  },
+  "Ashamed-Resigned-To change": {
+    "system": "ashamed-to-change-resigned",
+    "label": "Resigned Ashamed change",
+    "rule_fired": "ashamed_resigned_to_change"
+  },
+  "Ashamed-Resigned-To be seen": {
+    "system": "ashamed-to-be-seen-resigned",
+    "label": "Resigned Ashamed be seen",
+    "rule_fired": "ashamed_resigned_to_be_seen"
+  },
+  "Lonely-Assertive-To be free": {
+    "system": "lonely-to-be-free-assertive",
+    "label": "Assertive Lonely be free",
+    "rule_fired": "lonely_assertive_to_be_free"
+  },
+  "Lonely-Assertive-To belong": {
+    "system": "lonely-to-belong-assertive",
+    "label": "Assertive Lonely belong",
+    "rule_fired": "lonely_assertive_to_belong"
+  },
+  "Lonely-Assertive-To understand": {
+    "system": "lonely-to-understand-assertive",
+    "label": "Assertive Lonely understand",
+    "rule_fired": "lonely_assertive_to_understand"
+  },
+  "Lonely-Assertive-To change": {
+    "system": "lonely-to-change-assertive",
+    "label": "Assertive Lonely change",
+    "rule_fired": "lonely_assertive_to_change"
+  },
+  "Lonely-Assertive-To be seen": {
+    "system": "lonely-to-be-seen-assertive",
+    "label": "Assertive Lonely be seen",
+    "rule_fired": "lonely_assertive_to_be_seen"
+  },
+  "Lonely-Stewarding-To be free": {
+    "system": "lonely-to-be-free-stewarding",
+    "label": "Stewarding Lonely be free",
+    "rule_fired": "lonely_stewarding_to_be_free"
+  },
+  "Lonely-Stewarding-To belong": {
+    "system": "lonely-to-belong-stewarding",
+    "label": "Stewarding Lonely belong",
+    "rule_fired": "lonely_stewarding_to_belong"
+  },
+  "Lonely-Stewarding-To understand": {
+    "system": "lonely-to-understand-stewarding",
+    "label": "Stewarding Lonely understand",
+    "rule_fired": "lonely_stewarding_to_understand"
+  },
+  "Lonely-Stewarding-To change": {
+    "system": "lonely-to-change-stewarding",
+    "label": "Stewarding Lonely change",
+    "rule_fired": "lonely_stewarding_to_change"
+  },
+  "Lonely-Stewarding-To be seen": {
+    "system": "lonely-to-be-seen-stewarding",
+    "label": "Stewarding Lonely be seen",
+    "rule_fired": "lonely_stewarding_to_be_seen"
+  },
+  "Lonely-Reflective-To be free": {
+    "system": "lonely-to-be-free-reflective",
+    "label": "Reflective Lonely be free",
+    "rule_fired": "lonely_reflective_to_be_free"
+  },
+  "Lonely-Reflective-To belong": {
+    "system": "lonely-to-belong-reflective",
+    "label": "Reflective Lonely belong",
+    "rule_fired": "lonely_reflective_to_belong"
+  },
+  "Lonely-Reflective-To understand": {
+    "system": "lonely-to-understand-reflective",
+    "label": "Reflective Lonely understand",
+    "rule_fired": "lonely_reflective_to_understand"
+  },
+  "Lonely-Reflective-To change": {
+    "system": "lonely-to-change-reflective",
+    "label": "Reflective Lonely change",
+    "rule_fired": "lonely_reflective_to_change"
+  },
+  "Lonely-Reflective-To be seen": {
+    "system": "lonely-to-be-seen-reflective",
+    "label": "Reflective Lonely be seen",
+    "rule_fired": "lonely_reflective_to_be_seen"
+  },
+  "Lonely-Open-To be free": {
+    "system": "lonely-to-be-free-open",
+    "label": "Open Lonely be free",
+    "rule_fired": "lonely_open_to_be_free"
+  },
+  "Lonely-Open-To belong": {
+    "system": "lonely-to-belong-open",
+    "label": "Open Lonely belong",
+    "rule_fired": "lonely_open_to_belong"
+  },
+  "Lonely-Open-To understand": {
+    "system": "lonely-to-understand-open",
+    "label": "Open Lonely understand",
+    "rule_fired": "lonely_open_to_understand"
+  },
+  "Lonely-Open-To change": {
+    "system": "lonely-to-change-open",
+    "label": "Open Lonely change",
+    "rule_fired": "lonely_open_to_change"
+  },
+  "Lonely-Open-To be seen": {
+    "system": "lonely-to-be-seen-open",
+    "label": "Open Lonely be seen",
+    "rule_fired": "lonely_open_to_be_seen"
+  },
+  "Lonely-Guarded-To be free": {
+    "system": "lonely-to-be-free-guarded",
+    "label": "Guarded Lonely be free",
+    "rule_fired": "lonely_guarded_to_be_free"
+  },
+  "Lonely-Guarded-To belong": {
+    "system": "lonely-to-belong-guarded",
+    "label": "Guarded Lonely belong",
+    "rule_fired": "lonely_guarded_to_belong"
+  },
+  "Lonely-Guarded-To understand": {
+    "system": "lonely-to-understand-guarded",
+    "label": "Guarded Lonely understand",
+    "rule_fired": "lonely_guarded_to_understand"
+  },
+  "Lonely-Guarded-To change": {
+    "system": "lonely-to-change-guarded",
+    "label": "Guarded Lonely change",
+    "rule_fired": "lonely_guarded_to_change"
+  },
+  "Lonely-Guarded-To be seen": {
+    "system": "lonely-to-be-seen-guarded",
+    "label": "Guarded Lonely be seen",
+    "rule_fired": "lonely_guarded_to_be_seen"
+  },
+  "Lonely-Rebellious-To be free": {
+    "system": "lonely-to-be-free-rebellious",
+    "label": "Rebellious Lonely be free",
+    "rule_fired": "lonely_rebellious_to_be_free"
+  },
+  "Lonely-Rebellious-To belong": {
+    "system": "lonely-to-belong-rebellious",
+    "label": "Rebellious Lonely belong",
+    "rule_fired": "lonely_rebellious_to_belong"
+  },
+  "Lonely-Rebellious-To understand": {
+    "system": "lonely-to-understand-rebellious",
+    "label": "Rebellious Lonely understand",
+    "rule_fired": "lonely_rebellious_to_understand"
+  },
+  "Lonely-Rebellious-To change": {
+    "system": "lonely-to-change-rebellious",
+    "label": "Rebellious Lonely change",
+    "rule_fired": "lonely_rebellious_to_change"
+  },
+  "Lonely-Rebellious-To be seen": {
+    "system": "lonely-to-be-seen-rebellious",
+    "label": "Rebellious Lonely be seen",
+    "rule_fired": "lonely_rebellious_to_be_seen"
+  },
+  "Lonely-Resigned-To be free": {
+    "system": "lonely-to-be-free-resigned",
+    "label": "Resigned Lonely be free",
+    "rule_fired": "lonely_resigned_to_be_free"
+  },
+  "Lonely-Resigned-To belong": {
+    "system": "lonely-to-belong-resigned",
+    "label": "Resigned Lonely belong",
+    "rule_fired": "lonely_resigned_to_belong"
+  },
+  "Lonely-Resigned-To understand": {
+    "system": "lonely-to-understand-resigned",
+    "label": "Resigned Lonely understand",
+    "rule_fired": "lonely_resigned_to_understand"
+  },
+  "Lonely-Resigned-To change": {
+    "system": "lonely-to-change-resigned",
+    "label": "Resigned Lonely change",
+    "rule_fired": "lonely_resigned_to_change"
+  },
+  "Lonely-Resigned-To be seen": {
+    "system": "lonely-to-be-seen-resigned",
+    "label": "Resigned Lonely be seen",
+    "rule_fired": "lonely_resigned_to_be_seen"
+  },
+  "Grieving-Assertive-To be free": {
+    "system": "grieving-to-be-free-assertive",
+    "label": "Assertive Grieving be free",
+    "rule_fired": "grieving_assertive_to_be_free"
+  },
+  "Grieving-Assertive-To belong": {
+    "system": "grieving-to-belong-assertive",
+    "label": "Assertive Grieving belong",
+    "rule_fired": "grieving_assertive_to_belong"
+  },
+  "Grieving-Assertive-To understand": {
+    "system": "grieving-to-understand-assertive",
+    "label": "Assertive Grieving understand",
+    "rule_fired": "grieving_assertive_to_understand"
+  },
+  "Grieving-Assertive-To change": {
+    "system": "grieving-to-change-assertive",
+    "label": "Assertive Grieving change",
+    "rule_fired": "grieving_assertive_to_change"
+  },
+  "Grieving-Assertive-To be seen": {
+    "system": "grieving-to-be-seen-assertive",
+    "label": "Assertive Grieving be seen",
+    "rule_fired": "grieving_assertive_to_be_seen"
+  },
+  "Grieving-Stewarding-To be free": {
+    "system": "grieving-to-be-free-stewarding",
+    "label": "Stewarding Grieving be free",
+    "rule_fired": "grieving_stewarding_to_be_free"
+  },
+  "Grieving-Stewarding-To belong": {
+    "system": "grieving-to-belong-stewarding",
+    "label": "Stewarding Grieving belong",
+    "rule_fired": "grieving_stewarding_to_belong"
+  },
+  "Grieving-Stewarding-To understand": {
+    "system": "grieving-to-understand-stewarding",
+    "label": "Stewarding Grieving understand",
+    "rule_fired": "grieving_stewarding_to_understand"
+  },
+  "Grieving-Stewarding-To change": {
+    "system": "grieving-to-change-stewarding",
+    "label": "Stewarding Grieving change",
+    "rule_fired": "grieving_stewarding_to_change"
+  },
+  "Grieving-Stewarding-To be seen": {
+    "system": "grieving-to-be-seen-stewarding",
+    "label": "Stewarding Grieving be seen",
+    "rule_fired": "grieving_stewarding_to_be_seen"
+  },
+  "Grieving-Reflective-To be free": {
+    "system": "grieving-to-be-free-reflective",
+    "label": "Reflective Grieving be free",
+    "rule_fired": "grieving_reflective_to_be_free"
+  },
+  "Grieving-Reflective-To belong": {
+    "system": "grieving-to-belong-reflective",
+    "label": "Reflective Grieving belong",
+    "rule_fired": "grieving_reflective_to_belong"
+  },
+  "Grieving-Reflective-To understand": {
+    "system": "grieving-to-understand-reflective",
+    "label": "Reflective Grieving understand",
+    "rule_fired": "grieving_reflective_to_understand"
+  },
+  "Grieving-Reflective-To change": {
+    "system": "grieving-to-change-reflective",
+    "label": "Reflective Grieving change",
+    "rule_fired": "grieving_reflective_to_change"
+  },
+  "Grieving-Reflective-To be seen": {
+    "system": "grieving-to-be-seen-reflective",
+    "label": "Reflective Grieving be seen",
+    "rule_fired": "grieving_reflective_to_be_seen"
+  },
+  "Grieving-Open-To be free": {
+    "system": "grieving-to-be-free-open",
+    "label": "Open Grieving be free",
+    "rule_fired": "grieving_open_to_be_free"
+  },
+  "Grieving-Open-To belong": {
+    "system": "grieving-to-belong-open",
+    "label": "Open Grieving belong",
+    "rule_fired": "grieving_open_to_belong"
+  },
+  "Grieving-Open-To understand": {
+    "system": "grieving-to-understand-open",
+    "label": "Open Grieving understand",
+    "rule_fired": "grieving_open_to_understand"
+  },
+  "Grieving-Open-To change": {
+    "system": "grieving-to-change-open",
+    "label": "Open Grieving change",
+    "rule_fired": "grieving_open_to_change"
+  },
+  "Grieving-Open-To be seen": {
+    "system": "grieving-to-be-seen-open",
+    "label": "Open Grieving be seen",
+    "rule_fired": "grieving_open_to_be_seen"
+  },
+  "Grieving-Guarded-To be free": {
+    "system": "grieving-to-be-free-guarded",
+    "label": "Guarded Grieving be free",
+    "rule_fired": "grieving_guarded_to_be_free"
+  },
+  "Grieving-Guarded-To belong": {
+    "system": "grieving-to-belong-guarded",
+    "label": "Guarded Grieving belong",
+    "rule_fired": "grieving_guarded_to_belong"
+  },
+  "Grieving-Guarded-To understand": {
+    "system": "grieving-to-understand-guarded",
+    "label": "Guarded Grieving understand",
+    "rule_fired": "grieving_guarded_to_understand"
+  },
+  "Grieving-Guarded-To change": {
+    "system": "grieving-to-change-guarded",
+    "label": "Guarded Grieving change",
+    "rule_fired": "grieving_guarded_to_change"
+  },
+  "Grieving-Guarded-To be seen": {
+    "system": "grieving-to-be-seen-guarded",
+    "label": "Guarded Grieving be seen",
+    "rule_fired": "grieving_guarded_to_be_seen"
+  },
+  "Grieving-Rebellious-To be free": {
+    "system": "grieving-to-be-free-rebellious",
+    "label": "Rebellious Grieving be free",
+    "rule_fired": "grieving_rebellious_to_be_free"
+  },
+  "Grieving-Rebellious-To belong": {
+    "system": "grieving-to-belong-rebellious",
+    "label": "Rebellious Grieving belong",
+    "rule_fired": "grieving_rebellious_to_belong"
+  },
+  "Grieving-Rebellious-To understand": {
+    "system": "grieving-to-understand-rebellious",
+    "label": "Rebellious Grieving understand",
+    "rule_fired": "grieving_rebellious_to_understand"
+  },
+  "Grieving-Rebellious-To change": {
+    "system": "grieving-to-change-rebellious",
+    "label": "Rebellious Grieving change",
+    "rule_fired": "grieving_rebellious_to_change"
+  },
+  "Grieving-Rebellious-To be seen": {
+    "system": "grieving-to-be-seen-rebellious",
+    "label": "Rebellious Grieving be seen",
+    "rule_fired": "grieving_rebellious_to_be_seen"
+  },
+  "Grieving-Resigned-To be free": {
+    "system": "grieving-to-be-free-resigned",
+    "label": "Resigned Grieving be free",
+    "rule_fired": "grieving_resigned_to_be_free"
+  },
+  "Grieving-Resigned-To belong": {
+    "system": "grieving-to-belong-resigned",
+    "label": "Resigned Grieving belong",
+    "rule_fired": "grieving_resigned_to_belong"
+  },
+  "Grieving-Resigned-To understand": {
+    "system": "grieving-to-understand-resigned",
+    "label": "Resigned Grieving understand",
+    "rule_fired": "grieving_resigned_to_understand"
+  },
+  "Grieving-Resigned-To change": {
+    "system": "grieving-to-change-resigned",
+    "label": "Resigned Grieving change",
+    "rule_fired": "grieving_resigned_to_change"
+  },
+  "Grieving-Resigned-To be seen": {
+    "system": "grieving-to-be-seen-resigned",
+    "label": "Resigned Grieving be seen",
+    "rule_fired": "grieving_resigned_to_be_seen"
+  },
+  "Bitter-Assertive-To be free": {
+    "system": "bitter-to-be-free-assertive",
+    "label": "Assertive Bitter be free",
+    "rule_fired": "bitter_assertive_to_be_free"
+  },
+  "Bitter-Assertive-To belong": {
+    "system": "bitter-to-belong-assertive",
+    "label": "Assertive Bitter belong",
+    "rule_fired": "bitter_assertive_to_belong"
+  },
+  "Bitter-Assertive-To understand": {
+    "system": "bitter-to-understand-assertive",
+    "label": "Assertive Bitter understand",
+    "rule_fired": "bitter_assertive_to_understand"
+  },
+  "Bitter-Assertive-To change": {
+    "system": "bitter-to-change-assertive",
+    "label": "Assertive Bitter change",
+    "rule_fired": "bitter_assertive_to_change"
+  },
+  "Bitter-Assertive-To be seen": {
+    "system": "bitter-to-be-seen-assertive",
+    "label": "Assertive Bitter be seen",
+    "rule_fired": "bitter_assertive_to_be_seen"
+  },
+  "Bitter-Stewarding-To be free": {
+    "system": "bitter-to-be-free-stewarding",
+    "label": "Stewarding Bitter be free",
+    "rule_fired": "bitter_stewarding_to_be_free"
+  },
+  "Bitter-Stewarding-To belong": {
+    "system": "bitter-to-belong-stewarding",
+    "label": "Stewarding Bitter belong",
+    "rule_fired": "bitter_stewarding_to_belong"
+  },
+  "Bitter-Stewarding-To understand": {
+    "system": "bitter-to-understand-stewarding",
+    "label": "Stewarding Bitter understand",
+    "rule_fired": "bitter_stewarding_to_understand"
+  },
+  "Bitter-Stewarding-To change": {
+    "system": "bitter-to-change-stewarding",
+    "label": "Stewarding Bitter change",
+    "rule_fired": "bitter_stewarding_to_change"
+  },
+  "Bitter-Stewarding-To be seen": {
+    "system": "bitter-to-be-seen-stewarding",
+    "label": "Stewarding Bitter be seen",
+    "rule_fired": "bitter_stewarding_to_be_seen"
+  },
+  "Bitter-Reflective-To be free": {
+    "system": "bitter-to-be-free-reflective",
+    "label": "Reflective Bitter be free",
+    "rule_fired": "bitter_reflective_to_be_free"
+  },
+  "Bitter-Reflective-To belong": {
+    "system": "bitter-to-belong-reflective",
+    "label": "Reflective Bitter belong",
+    "rule_fired": "bitter_reflective_to_belong"
+  },
+  "Bitter-Reflective-To understand": {
+    "system": "bitter-to-understand-reflective",
+    "label": "Reflective Bitter understand",
+    "rule_fired": "bitter_reflective_to_understand"
+  },
+  "Bitter-Reflective-To change": {
+    "system": "bitter-to-change-reflective",
+    "label": "Reflective Bitter change",
+    "rule_fired": "bitter_reflective_to_change"
+  },
+  "Bitter-Reflective-To be seen": {
+    "system": "bitter-to-be-seen-reflective",
+    "label": "Reflective Bitter be seen",
+    "rule_fired": "bitter_reflective_to_be_seen"
+  },
+  "Bitter-Open-To be free": {
+    "system": "bitter-to-be-free-open",
+    "label": "Open Bitter be free",
+    "rule_fired": "bitter_open_to_be_free"
+  },
+  "Bitter-Open-To belong": {
+    "system": "bitter-to-belong-open",
+    "label": "Open Bitter belong",
+    "rule_fired": "bitter_open_to_belong"
+  },
+  "Bitter-Open-To understand": {
+    "system": "bitter-to-understand-open",
+    "label": "Open Bitter understand",
+    "rule_fired": "bitter_open_to_understand"
+  },
+  "Bitter-Open-To change": {
+    "system": "bitter-to-change-open",
+    "label": "Open Bitter change",
+    "rule_fired": "bitter_open_to_change"
+  },
+  "Bitter-Open-To be seen": {
+    "system": "bitter-to-be-seen-open",
+    "label": "Open Bitter be seen",
+    "rule_fired": "bitter_open_to_be_seen"
+  },
+  "Bitter-Guarded-To be free": {
+    "system": "bitter-to-be-free-guarded",
+    "label": "Guarded Bitter be free",
+    "rule_fired": "bitter_guarded_to_be_free"
+  },
+  "Bitter-Guarded-To belong": {
+    "system": "bitter-to-belong-guarded",
+    "label": "Guarded Bitter belong",
+    "rule_fired": "bitter_guarded_to_belong"
+  },
+  "Bitter-Guarded-To understand": {
+    "system": "bitter-to-understand-guarded",
+    "label": "Guarded Bitter understand",
+    "rule_fired": "bitter_guarded_to_understand"
+  },
+  "Bitter-Guarded-To change": {
+    "system": "bitter-to-change-guarded",
+    "label": "Guarded Bitter change",
+    "rule_fired": "bitter_guarded_to_change"
+  },
+  "Bitter-Guarded-To be seen": {
+    "system": "bitter-to-be-seen-guarded",
+    "label": "Guarded Bitter be seen",
+    "rule_fired": "bitter_guarded_to_be_seen"
+  },
+  "Bitter-Rebellious-To be free": {
+    "system": "bitter-to-be-free-rebellious",
+    "label": "Rebellious Bitter be free",
+    "rule_fired": "bitter_rebellious_to_be_free"
+  },
+  "Bitter-Rebellious-To belong": {
+    "system": "bitter-to-belong-rebellious",
+    "label": "Rebellious Bitter belong",
+    "rule_fired": "bitter_rebellious_to_belong"
+  },
+  "Bitter-Rebellious-To understand": {
+    "system": "bitter-to-understand-rebellious",
+    "label": "Rebellious Bitter understand",
+    "rule_fired": "bitter_rebellious_to_understand"
+  },
+  "Bitter-Rebellious-To change": {
+    "system": "bitter-to-change-rebellious",
+    "label": "Rebellious Bitter change",
+    "rule_fired": "bitter_rebellious_to_change"
+  },
+  "Bitter-Rebellious-To be seen": {
+    "system": "bitter-to-be-seen-rebellious",
+    "label": "Rebellious Bitter be seen",
+    "rule_fired": "bitter_rebellious_to_be_seen"
+  },
+  "Bitter-Resigned-To be free": {
+    "system": "bitter-to-be-free-resigned",
+    "label": "Resigned Bitter be free",
+    "rule_fired": "bitter_resigned_to_be_free"
+  },
+  "Bitter-Resigned-To belong": {
+    "system": "bitter-to-belong-resigned",
+    "label": "Resigned Bitter belong",
+    "rule_fired": "bitter_resigned_to_belong"
+  },
+  "Bitter-Resigned-To understand": {
+    "system": "bitter-to-understand-resigned",
+    "label": "Resigned Bitter understand",
+    "rule_fired": "bitter_resigned_to_understand"
+  },
+  "Bitter-Resigned-To change": {
+    "system": "bitter-to-change-resigned",
+    "label": "Resigned Bitter change",
+    "rule_fired": "bitter_resigned_to_change"
+  },
+  "Bitter-Resigned-To be seen": {
+    "system": "bitter-to-be-seen-resigned",
+    "label": "Resigned Bitter be seen",
+    "rule_fired": "bitter_resigned_to_be_seen"
+  },
+  "Restless-Assertive-To be free": {
+    "system": "restless-to-be-free-assertive",
+    "label": "Assertive Restless be free",
+    "rule_fired": "restless_assertive_to_be_free"
+  },
+  "Restless-Assertive-To belong": {
+    "system": "restless-to-belong-assertive",
+    "label": "Assertive Restless belong",
+    "rule_fired": "restless_assertive_to_belong"
+  },
+  "Restless-Assertive-To understand": {
+    "system": "restless-to-understand-assertive",
+    "label": "Assertive Restless understand",
+    "rule_fired": "restless_assertive_to_understand"
+  },
+  "Restless-Assertive-To change": {
+    "system": "restless-to-change-assertive",
+    "label": "Assertive Restless change",
+    "rule_fired": "restless_assertive_to_change"
+  },
+  "Restless-Assertive-To be seen": {
+    "system": "restless-to-be-seen-assertive",
+    "label": "Assertive Restless be seen",
+    "rule_fired": "restless_assertive_to_be_seen"
+  },
+  "Restless-Stewarding-To be free": {
+    "system": "restless-to-be-free-stewarding",
+    "label": "Stewarding Restless be free",
+    "rule_fired": "restless_stewarding_to_be_free"
+  },
+  "Restless-Stewarding-To belong": {
+    "system": "restless-to-belong-stewarding",
+    "label": "Stewarding Restless belong",
+    "rule_fired": "restless_stewarding_to_belong"
+  },
+  "Restless-Stewarding-To understand": {
+    "system": "restless-to-understand-stewarding",
+    "label": "Stewarding Restless understand",
+    "rule_fired": "restless_stewarding_to_understand"
+  },
+  "Restless-Stewarding-To change": {
+    "system": "restless-to-change-stewarding",
+    "label": "Stewarding Restless change",
+    "rule_fired": "restless_stewarding_to_change"
+  },
+  "Restless-Stewarding-To be seen": {
+    "system": "restless-to-be-seen-stewarding",
+    "label": "Stewarding Restless be seen",
+    "rule_fired": "restless_stewarding_to_be_seen"
+  },
+  "Restless-Reflective-To be free": {
+    "system": "restless-to-be-free-reflective",
+    "label": "Reflective Restless be free",
+    "rule_fired": "restless_reflective_to_be_free"
+  },
+  "Restless-Reflective-To belong": {
+    "system": "restless-to-belong-reflective",
+    "label": "Reflective Restless belong",
+    "rule_fired": "restless_reflective_to_belong"
+  },
+  "Restless-Reflective-To understand": {
+    "system": "restless-to-understand-reflective",
+    "label": "Reflective Restless understand",
+    "rule_fired": "restless_reflective_to_understand"
+  },
+  "Restless-Reflective-To change": {
+    "system": "restless-to-change-reflective",
+    "label": "Reflective Restless change",
+    "rule_fired": "restless_reflective_to_change"
+  },
+  "Restless-Reflective-To be seen": {
+    "system": "restless-to-be-seen-reflective",
+    "label": "Reflective Restless be seen",
+    "rule_fired": "restless_reflective_to_be_seen"
+  },
+  "Restless-Open-To be free": {
+    "system": "restless-to-be-free-open",
+    "label": "Open Restless be free",
+    "rule_fired": "restless_open_to_be_free"
+  },
+  "Restless-Open-To belong": {
+    "system": "restless-to-belong-open",
+    "label": "Open Restless belong",
+    "rule_fired": "restless_open_to_belong"
+  },
+  "Restless-Open-To understand": {
+    "system": "restless-to-understand-open",
+    "label": "Open Restless understand",
+    "rule_fired": "restless_open_to_understand"
+  },
+  "Restless-Open-To change": {
+    "system": "restless-to-change-open",
+    "label": "Open Restless change",
+    "rule_fired": "restless_open_to_change"
+  },
+  "Restless-Open-To be seen": {
+    "system": "restless-to-be-seen-open",
+    "label": "Open Restless be seen",
+    "rule_fired": "restless_open_to_be_seen"
+  },
+  "Restless-Guarded-To be free": {
+    "system": "restless-to-be-free-guarded",
+    "label": "Guarded Restless be free",
+    "rule_fired": "restless_guarded_to_be_free"
+  },
+  "Restless-Guarded-To belong": {
+    "system": "restless-to-belong-guarded",
+    "label": "Guarded Restless belong",
+    "rule_fired": "restless_guarded_to_belong"
+  },
+  "Restless-Guarded-To understand": {
+    "system": "restless-to-understand-guarded",
+    "label": "Guarded Restless understand",
+    "rule_fired": "restless_guarded_to_understand"
+  },
+  "Restless-Guarded-To change": {
+    "system": "restless-to-change-guarded",
+    "label": "Guarded Restless change",
+    "rule_fired": "restless_guarded_to_change"
+  },
+  "Restless-Guarded-To be seen": {
+    "system": "restless-to-be-seen-guarded",
+    "label": "Guarded Restless be seen",
+    "rule_fired": "restless_guarded_to_be_seen"
+  },
+  "Restless-Rebellious-To be free": {
+    "system": "restless-to-be-free-rebellious",
+    "label": "Rebellious Restless be free",
+    "rule_fired": "restless_rebellious_to_be_free"
+  },
+  "Restless-Rebellious-To belong": {
+    "system": "restless-to-belong-rebellious",
+    "label": "Rebellious Restless belong",
+    "rule_fired": "restless_rebellious_to_belong"
+  },
+  "Restless-Rebellious-To understand": {
+    "system": "restless-to-understand-rebellious",
+    "label": "Rebellious Restless understand",
+    "rule_fired": "restless_rebellious_to_understand"
+  },
+  "Restless-Rebellious-To change": {
+    "system": "restless-to-change-rebellious",
+    "label": "Rebellious Restless change",
+    "rule_fired": "restless_rebellious_to_change"
+  },
+  "Restless-Rebellious-To be seen": {
+    "system": "restless-to-be-seen-rebellious",
+    "label": "Rebellious Restless be seen",
+    "rule_fired": "restless_rebellious_to_be_seen"
+  },
+  "Restless-Resigned-To be free": {
+    "system": "restless-to-be-free-resigned",
+    "label": "Resigned Restless be free",
+    "rule_fired": "restless_resigned_to_be_free"
+  },
+  "Restless-Resigned-To belong": {
+    "system": "restless-to-belong-resigned",
+    "label": "Resigned Restless belong",
+    "rule_fired": "restless_resigned_to_belong"
+  },
+  "Restless-Resigned-To understand": {
+    "system": "restless-to-understand-resigned",
+    "label": "Resigned Restless understand",
+    "rule_fired": "restless_resigned_to_understand"
+  },
+  "Restless-Resigned-To change": {
+    "system": "restless-to-change-resigned",
+    "label": "Resigned Restless change",
+    "rule_fired": "restless_resigned_to_change"
+  },
+  "Restless-Resigned-To be seen": {
+    "system": "restless-to-be-seen-resigned",
+    "label": "Resigned Restless be seen",
+    "rule_fired": "restless_resigned_to_be_seen"
+  },
+  "Hopeful-Assertive-To be free": {
+    "system": "hopeful-to-be-free-assertive",
+    "label": "Assertive Hopeful be free",
+    "rule_fired": "hopeful_assertive_to_be_free"
+  },
+  "Hopeful-Assertive-To belong": {
+    "system": "hopeful-to-belong-assertive",
+    "label": "Assertive Hopeful belong",
+    "rule_fired": "hopeful_assertive_to_belong"
+  },
+  "Hopeful-Assertive-To understand": {
+    "system": "hopeful-to-understand-assertive",
+    "label": "Assertive Hopeful understand",
+    "rule_fired": "hopeful_assertive_to_understand"
+  },
+  "Hopeful-Assertive-To change": {
+    "system": "hopeful-to-change-assertive",
+    "label": "Assertive Hopeful change",
+    "rule_fired": "hopeful_assertive_to_change"
+  },
+  "Hopeful-Assertive-To be seen": {
+    "system": "hopeful-to-be-seen-assertive",
+    "label": "Assertive Hopeful be seen",
+    "rule_fired": "hopeful_assertive_to_be_seen"
+  },
+  "Hopeful-Stewarding-To be free": {
+    "system": "hopeful-to-be-free-stewarding",
+    "label": "Stewarding Hopeful be free",
+    "rule_fired": "hopeful_stewarding_to_be_free"
+  },
+  "Hopeful-Stewarding-To belong": {
+    "system": "hopeful-to-belong-stewarding",
+    "label": "Stewarding Hopeful belong",
+    "rule_fired": "hopeful_stewarding_to_belong"
+  },
+  "Hopeful-Stewarding-To understand": {
+    "system": "hopeful-to-understand-stewarding",
+    "label": "Stewarding Hopeful understand",
+    "rule_fired": "hopeful_stewarding_to_understand"
+  },
+  "Hopeful-Stewarding-To change": {
+    "system": "hopeful-to-change-stewarding",
+    "label": "Stewarding Hopeful change",
+    "rule_fired": "hopeful_stewarding_to_change"
+  },
+  "Hopeful-Stewarding-To be seen": {
+    "system": "hopeful-to-be-seen-stewarding",
+    "label": "Stewarding Hopeful be seen",
+    "rule_fired": "hopeful_stewarding_to_be_seen"
+  },
+  "Hopeful-Reflective-To be free": {
+    "system": "hopeful-to-be-free-reflective",
+    "label": "Reflective Hopeful be free",
+    "rule_fired": "hopeful_reflective_to_be_free"
+  },
+  "Hopeful-Reflective-To belong": {
+    "system": "hopeful-to-belong-reflective",
+    "label": "Reflective Hopeful belong",
+    "rule_fired": "hopeful_reflective_to_belong"
+  },
+  "Hopeful-Reflective-To understand": {
+    "system": "hopeful-to-understand-reflective",
+    "label": "Reflective Hopeful understand",
+    "rule_fired": "hopeful_reflective_to_understand"
+  },
+  "Hopeful-Reflective-To change": {
+    "system": "hopeful-to-change-reflective",
+    "label": "Reflective Hopeful change",
+    "rule_fired": "hopeful_reflective_to_change"
+  },
+  "Hopeful-Reflective-To be seen": {
+    "system": "hopeful-to-be-seen-reflective",
+    "label": "Reflective Hopeful be seen",
+    "rule_fired": "hopeful_reflective_to_be_seen"
+  },
+  "Hopeful-Open-To be free": {
+    "system": "hopeful-to-be-free-open",
+    "label": "Open Hopeful be free",
+    "rule_fired": "hopeful_open_to_be_free"
+  },
+  "Hopeful-Open-To belong": {
+    "system": "hopeful-to-belong-open",
+    "label": "Open Hopeful belong",
+    "rule_fired": "hopeful_open_to_belong"
+  },
+  "Hopeful-Open-To understand": {
+    "system": "hopeful-to-understand-open",
+    "label": "Open Hopeful understand",
+    "rule_fired": "hopeful_open_to_understand"
+  },
+  "Hopeful-Open-To change": {
+    "system": "hopeful-to-change-open",
+    "label": "Open Hopeful change",
+    "rule_fired": "hopeful_open_to_change"
+  },
+  "Hopeful-Open-To be seen": {
+    "system": "hopeful-to-be-seen-open",
+    "label": "Open Hopeful be seen",
+    "rule_fired": "hopeful_open_to_be_seen"
+  },
+  "Hopeful-Guarded-To be free": {
+    "system": "hopeful-to-be-free-guarded",
+    "label": "Guarded Hopeful be free",
+    "rule_fired": "hopeful_guarded_to_be_free"
+  },
+  "Hopeful-Guarded-To belong": {
+    "system": "hopeful-to-belong-guarded",
+    "label": "Guarded Hopeful belong",
+    "rule_fired": "hopeful_guarded_to_belong"
+  },
+  "Hopeful-Guarded-To understand": {
+    "system": "hopeful-to-understand-guarded",
+    "label": "Guarded Hopeful understand",
+    "rule_fired": "hopeful_guarded_to_understand"
+  },
+  "Hopeful-Guarded-To change": {
+    "system": "hopeful-to-change-guarded",
+    "label": "Guarded Hopeful change",
+    "rule_fired": "hopeful_guarded_to_change"
+  },
+  "Hopeful-Guarded-To be seen": {
+    "system": "hopeful-to-be-seen-guarded",
+    "label": "Guarded Hopeful be seen",
+    "rule_fired": "hopeful_guarded_to_be_seen"
+  },
+  "Hopeful-Rebellious-To be free": {
+    "system": "hopeful-to-be-free-rebellious",
+    "label": "Rebellious Hopeful be free",
+    "rule_fired": "hopeful_rebellious_to_be_free"
+  },
+  "Hopeful-Rebellious-To belong": {
+    "system": "hopeful-to-belong-rebellious",
+    "label": "Rebellious Hopeful belong",
+    "rule_fired": "hopeful_rebellious_to_belong"
+  },
+  "Hopeful-Rebellious-To understand": {
+    "system": "hopeful-to-understand-rebellious",
+    "label": "Rebellious Hopeful understand",
+    "rule_fired": "hopeful_rebellious_to_understand"
+  },
+  "Hopeful-Rebellious-To change": {
+    "system": "hopeful-to-change-rebellious",
+    "label": "Rebellious Hopeful change",
+    "rule_fired": "hopeful_rebellious_to_change"
+  },
+  "Hopeful-Rebellious-To be seen": {
+    "system": "hopeful-to-be-seen-rebellious",
+    "label": "Rebellious Hopeful be seen",
+    "rule_fired": "hopeful_rebellious_to_be_seen"
+  },
+  "Hopeful-Resigned-To be free": {
+    "system": "hopeful-to-be-free-resigned",
+    "label": "Resigned Hopeful be free",
+    "rule_fired": "hopeful_resigned_to_be_free"
+  },
+  "Hopeful-Resigned-To belong": {
+    "system": "hopeful-to-belong-resigned",
+    "label": "Resigned Hopeful belong",
+    "rule_fired": "hopeful_resigned_to_belong"
+  },
+  "Hopeful-Resigned-To understand": {
+    "system": "hopeful-to-understand-resigned",
+    "label": "Resigned Hopeful understand",
+    "rule_fired": "hopeful_resigned_to_understand"
+  },
+  "Hopeful-Resigned-To change": {
+    "system": "hopeful-to-change-resigned",
+    "label": "Resigned Hopeful change",
+    "rule_fired": "hopeful_resigned_to_change"
+  },
+  "Hopeful-Resigned-To be seen": {
+    "system": "hopeful-to-be-seen-resigned",
+    "label": "Resigned Hopeful be seen",
+    "rule_fired": "hopeful_resigned_to_be_seen"
+  }
+}
