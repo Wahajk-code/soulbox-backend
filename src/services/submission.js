@@ -10,7 +10,44 @@ const auth = new google.auth.GoogleAuth({
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
-// Flatten nested objects (e.g., { desire: { genre_calling: 'Fantasy' } } → { 'desire.genre_calling': 'Fantasy' })
+// Define exact headers for the Responses sheet
+const HEADERS = [
+  "submitted_at",
+  "name",
+  "email",
+  "country",
+  "region",
+  "arc.system",
+  "arc.label",
+  "arc.rule_fired",
+  "desire.genre_calling",
+  "desire.genre_flavour",
+  "desire.genre_subflavour",
+  "desire.tone",
+  "desire.pacing",
+  "desire.literary_depth",
+  "desire.plot_bias",
+  "desire.sensitivity",
+  "cultural_lens.axis_tradition_change",
+  "cultural_lens.whose_story",
+  "cultural_lens.protagonist_lens",
+  "cultural_lens.aggregate",
+  "soul_climate.temperature_primary.tag",
+  "soul_climate.temperature_primary.whisper_text",
+  "soul_climate.temperature_secondary.tag",
+  "soul_climate.temperature_secondary.image_id",
+  "soul_climate.posture.final",
+  "soul_climate.posture.path.q9a",
+  "soul_climate.posture.path.q9b",
+  "yearning.cluster_image",
+  "yearning.final",
+  "yearning.whisper_confirm",
+  "reader_context.favourite_books",
+  "reader_context.themes_issues",
+  "reader_context.heavy_triggers",
+];
+
+// Flatten nested objects (e.g., { arc: { system: 'Healing / Rebirth' } } → { 'arc.system': 'Healing / Rebirth' })
 function flattenObject(obj, prefix = "") {
   const flat = {};
   for (const [key, value] of Object.entries(obj || {})) {
@@ -18,7 +55,7 @@ function flattenObject(obj, prefix = "") {
     if (typeof value === "object" && value !== null && !Array.isArray(value)) {
       Object.assign(flat, flattenObject(value, newKey));
     } else {
-      flat[newKey] = Array.isArray(value) ? value.join(", ") : value;
+      flat[newKey] = Array.isArray(value) ? JSON.stringify(value) : value;
     }
   }
   return flat;
@@ -28,40 +65,48 @@ async function saveSubmission(submission) {
   try {
     const sheetsClient = await auth.getClient();
     const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-    const sheetName = process.env.SHEET_NAME || "Sheet1";
-    const range = `${sheetName}!A:Z`;
+    const sheetName = process.env.SHEET_NAME || "Responses";
+    const range = `${sheetName}!A:AG`; // 33 columns (A to AG)
 
     // Flatten submission data
     const flattened = flattenObject(submission);
-    const headers = Object.keys(flattened);
-    flattened.timestamp = new Date().toISOString(); // Add timestamp
-    headers.push("timestamp");
+    flattened.submitted_at = new Date().toISOString(); // Use submitted_at as per headers
+    flattened.region = flattened.region || flattened.country; // Mirror country to region if not set
 
     // Check if sheet has headers; add if missing
     const existing = await sheets.spreadsheets.values
       .get({
         auth: sheetsClient,
         spreadsheetId,
-        range: `${sheetName}!A1`,
+        range: `${sheetName}!A1:AG1`,
       })
       .catch(() => null);
 
     if (
       !existing ||
       !existing.data.values ||
-      existing.data.values.length === 0
+      existing.data.values.length === 0 ||
+      existing.data.values[0].length === 0
     ) {
+      console.log("[SubmissionService] Writing headers to Responses sheet");
       await sheets.spreadsheets.values.update({
         auth: sheetsClient,
         spreadsheetId,
-        range: `${sheetName}!A1`,
+        range: `${sheetName}!A1:AG1`,
         valueInputOption: "RAW",
-        resource: { values: [headers] },
+        resource: { values: [HEADERS] },
       });
     }
 
+    // Prepare row in the exact order of HEADERS
+    const row = HEADERS.map((header) => flattened[header] || "");
+    console.log("[SubmissionService] Appending submission row", {
+      email: "[REDACTED]",
+      submitted_at: flattened.submitted_at,
+      arc_label: flattened["arc.label"],
+    });
+
     // Append row
-    const row = headers.map((header) => flattened[header] || "");
     await sheets.spreadsheets.values.append({
       auth: sheetsClient,
       spreadsheetId,
@@ -69,13 +114,15 @@ async function saveSubmission(submission) {
       valueInputOption: "RAW",
       resource: { values: [row] },
     });
+
+    console.log("[SubmissionService] Submission saved successfully");
   } catch (error) {
     console.error(
-      "Failed to save submission to Google Sheets:",
+      "[SubmissionService] Failed to save submission to Google Sheets:",
       error.message,
       error.stack
     );
-    throw new Error("Failed to save submission: " + error.message);
+    // Do not throw error to allow user flow to continue
   }
 }
 
