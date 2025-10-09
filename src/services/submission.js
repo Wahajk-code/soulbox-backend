@@ -28,8 +28,8 @@ const HEADERS = [
   "desire.literary_depth",
   "desire.plot_bias",
   "desire.sensitivity",
-  "cultural_lens.axis_tradition_change.value", // Updated
-  "cultural_lens.whose_story.value", // Updated
+  "cultural_lens.axis_tradition_change.value",
+  "cultural_lens.whose_story.value",
   "cultural_lens.protagonist_lens.value",
   "cultural_lens.aggregate",
   "soul_climate.temperature_primary.tag",
@@ -63,6 +63,12 @@ function flattenObject(obj, prefix = "") {
 
 async function saveSubmission(submission) {
   try {
+    // Validate required fields
+    if (!submission || !submission.email || !submission.country) {
+      console.error("[SubmissionService] Invalid submission: missing required fields", { submission });
+      return;
+    }
+
     const sheetsClient = await auth.getClient();
     const spreadsheetId = process.env.GOOGLE_SHEET_ID;
     const sheetName = process.env.SHEET_NAME || "Responses";
@@ -70,24 +76,17 @@ async function saveSubmission(submission) {
 
     // Flatten submission data
     const flattened = flattenObject(submission);
-    flattened.submitted_at = new Date().toISOString(); // Use submitted_at as per headers
-    flattened.region = flattened.region || flattened.country; // Mirror country to region if not set
+    flattened.submitted_at = new Date().toISOString(); // Set timestamp
+    flattened.region = flattened.region || flattened.country; // Mirror country to region
 
     // Check if sheet has headers; add if missing
-    const existing = await sheets.spreadsheets.values
-      .get({
-        auth: sheetsClient,
-        spreadsheetId,
-        range: `${sheetName}!A1:AG1`,
-      })
-      .catch(() => null);
+    const existing = await sheets.spreadsheets.values.get({
+      auth: sheetsClient,
+      spreadsheetId,
+      range: `${sheetName}!A1:AG1`,
+    }).catch(() => null);
 
-    if (
-      !existing ||
-      !existing.data.values ||
-      existing.data.values.length === 0 ||
-      existing.data.values[0].length === 0
-    ) {
+    if (!existing || !existing.data.values || existing.data.values.length === 0) {
       console.log("[SubmissionService] Writing headers to Responses sheet");
       await sheets.spreadsheets.values.update({
         auth: sheetsClient,
@@ -117,12 +116,7 @@ async function saveSubmission(submission) {
 
     console.log("[SubmissionService] Submission saved successfully");
   } catch (error) {
-    console.error(
-      "[SubmissionService] Failed to save submission to Google Sheets:",
-      error.message,
-      error.stack
-    );
-    // Do not throw error to allow user flow to continue
+    console.error("[SubmissionService] Failed to save submission to Google Sheets:", error.message);
   }
 }
 
