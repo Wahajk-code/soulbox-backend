@@ -28,9 +28,9 @@ const HEADERS = [
   "desire.literary_depth",
   "desire.plot_bias",
   "desire.sensitivity",
-  "cultural_lens.axis_tradition_change",
-  "cultural_lens.whose_story",
-  "cultural_lens.protagonist_lens",
+  "cultural_lens.axis_tradition_change.value", // Updated
+  "cultural_lens.whose_story.value", // Updated
+  "cultural_lens.protagonist_lens.value",
   "cultural_lens.aggregate",
   "soul_climate.temperature_primary.tag",
   "soul_climate.temperature_primary.whisper_text",
