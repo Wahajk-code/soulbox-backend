@@ -142,13 +142,27 @@ router.post("/calculate-arc", async (req, res) => {
   }
 });
 
+// routes/submission.js (or wherever your router lives)
+
 router.post("/submit", async (req, res) => {
   try {
-    const submission = req.body;
+    let submission = req.body;
+
+   
+    if (submission.quizState) {
+      submission = {
+        ...submission.quizState,                // ← pull out the real data
+        submitted_at: new Date().toISOString(), // ← add timestamp
+      };
+    } else {
+      // safety net for old payloads
+      submission.submitted_at = new Date().toISOString();
+    }
     await submissionService.saveSubmission(submission);
+
     res.json({ ok: true });
   } catch (error) {
-    console.error("Error saving submission:", error);
+    console.error("Submission failed:", error);
     res.status(500).json({ ok: false, error: error.message });
   }
 });
