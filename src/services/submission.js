@@ -5,7 +5,36 @@ const sheets = google.sheets("v4");
 const auth = new google.auth.GoogleAuth({
   credentials: {
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
-    private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+    const privateKey = `
+-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDnu4ExfAGnLNy+
+oF/vMBOBfmOPcaq/qtNgCbuhe5S9+r+oCF5hf5ywZJx0oZZuHeT0GTv9pb62uQ7C
+zN09TLHV/VLRxF+GDARDb/4kyq8BjvRXMJW11aaGfXkK1ZTZj2GH/W9ETdJt3Fio
+umDLVpEwO3C+OlVEAssbF/9KxHUx8V+ezjapY4C8Mv1MzcQ9s2I1z3AIIrx+95Ip
+V2tv/wP6JP679mouq3Jaw0SuONuLzqRJ3Llq+yASO9aDgJPtqrQifK0nOeU+QHnQ
+EacL6GOu4+WIM9gTNQZXWtFQWMC9aD7jHzhiRtNnlVd9FqpU0kaP5d/wECBsbfLl
+5V/b3FmNAgMBAAECggEABiEmDi6HBqp/nkU0tGlzoqG6tXEewJoepDQts9xGd236
+AtJR2Mdc2CeZIdaiWYBN7Yz7Ur6/GCs18j4j/fqY252rQqQsmKmZtUTxlnyL+4ES
+AnplA13G3VjVSk2S9dw+iq/P8SET11cUO0ZOyCIejgWMemOlnLpsL+fHF22x4ePB
+LeLAdUlnLoGjepZilZomEVZPe2oyXh9SulTE4YT+Numg8hP4zOu4/eeYu3ONsY+f
+tTWc5TyuIhPn3LQKRH+PllEM0PJUkDlpqmIWp+gKeGpDNp5U71MFXq36uAOEi9Gc
+f5Dz+HrfA0BfzI1Gzx/CRxM6dpIQARQIRodfrw1WewKBgQD44bJoz9z6NK9+MQ7B
+nrw/IA7zcd3BuzKpj7tDa+7BYcSdquALgMOU1RXD3f2mkd/6idvuaQ0ml19jngF3
+bvv/qkRWqwtUb7kaa6FlOahjE7q7A6meuP7M4O+RF0Etkfy21YE4OVc2LaxeEIr3
+gI5b9myClNMBUgy16RG0w9M7wwKBgQDuXD3w1/7QYbwPNXZTxZ9kI6bRP0K5ADcV
+/P9wQv41dz7zdYVLRocTQhoZpzVaLJziMAsdbyBaGN733VCY1YrhYcCy7pxc48xH
+3ildqMwX3zS9ZrPJnGDNCYdTIHf/9Wuh3uJewfQxehfH45AmQRgSDdfyZK+1ayeE
+h1Osgf3QbwKBgQCMSjzVFAaOC1C5I1IcFiwqsRl8ZL0JzUm7hseaM6b73u6DqaRt
+F4InzQ1dwS6PzD6i7T7J3vGIxV8Bujk9Z5QpA4NOD1BtoiSHHhB2DNA8OQzTCjd8
+vu7x8gFYmfEljNsU/LjARqJAafJ1e4G6Df8xG3EDEnz2i5eamuxeJtxVHQKBgCeM
+kpJ1pEf7D3MOkdWQgsPgznsFnhKIIJu7YL7FvtwsLvvCUh2NVDgzzZTYE5gkstss
+0YtOtvV8DvLde9QACo0e5RRLVxJqkaiTChYKPeLwHBYZBle7ZKxgml2Gk6KanAM9
+sh263MOg2HVIItDWGCJWva/wWN8nKmVo9s82umBtAoGAHGOrMhXoZTCwE7isoBE2
++1D3Rk1c1dmX+OdmwUEUOOTEBwlKg45Enlb4zESH+No69YzK7PZjU/jOtlAkhGUA
+F5huQtW9YciaZZhX+vpqIiU9PDE/VDmoZr6cDYu6gm4kQ4Ax2zkkEMFQdYc0EMHL
+xq3f1QWxhDyPyNy8VGs+hFA=
+-----END PRIVATE KEY-----
+`;  
   },
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
