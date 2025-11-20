@@ -1,11 +1,6 @@
 const { google } = require("googleapis");
 const sheets = google.sheets("v4");
-
-// Authenticate with Service Account
-const auth = new google.auth.GoogleAuth({
-  credentials: {
-    client_email: process.env.GOOGLE_CLIENT_EMAIL,
-    const privateKey = `
+const privateKey = `
 -----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDnu4ExfAGnLNy+
 oF/vMBOBfmOPcaq/qtNgCbuhe5S9+r+oCF5hf5ywZJx0oZZuHeT0GTv9pb62uQ7C
@@ -35,6 +30,11 @@ F5huQtW9YciaZZhX+vpqIiU9PDE/VDmoZr6cDYu6gm4kQ4Ax2zkkEMFQdYc0EMHL
 xq3f1QWxhDyPyNy8VGs+hFA=
 -----END PRIVATE KEY-----
 `;  
+// Authenticate with Service Account
+const auth = new google.auth.GoogleAuth({
+  credentials: {
+    client_email: process.env.GOOGLE_CLIENT_EMAIL,
+    private_key: privateKey,
   },
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
