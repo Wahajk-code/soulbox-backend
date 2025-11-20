@@ -98,8 +98,8 @@ async function saveSubmission(submission) {
     }
 
     const sheetsClient = await auth.getClient();
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-    const sheetName = process.env.SHEET_NAME || "Responses";
+    const spreadsheetId = "1RxdyCRhwYKGp8-fuYlHLhxvrdQTGcGg0bW93KzAuCtk";
+    const sheetName = "Sheet1";
     const range = `${sheetName}!A:AG`; // 33 columns (A to AG)
 
     // Flatten submission data
