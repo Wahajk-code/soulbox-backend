@@ -6,6 +6,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 const { google } = require("googleapis"); // ← ADD THIS LINE
 require("dotenv").config();
+const crypto = require("crypto");
 
 // Configure Mailchimp
 mailchimp.setConfig({
@@ -207,75 +208,127 @@ router.post("/mailchimp-subscribe", async (req, res) => {
 // ──────────────────────────────────────────────────────────────
 // DEBUG SHEETS ROUTE – ADDED HERE
 // ──────────────────────────────────────────────────────────────
+
+
 router.get("/debug-sheets", async (req, res) => {
-  // Simple protection – change or set via env
   const DEBUG_KEY = process.env.DEBUG_SHEETS_KEY || "test123";
-  if (req.query.key !== DEBUG_KEY) {
-    return res.status(401).json({ error: "Unauthorized – add ?key=YOUR_KEY" });
-  }
-
   const logs = [];
-  const log = (msg) => logs.push(`[${new Date().toISOString()}] ${msg}`);
+  const fatal = (msg) => logs.push({ level: "fatal", msg });
+  const info = (msg) => logs.push({ level: "info", msg });
+  const warn = (msg) => logs.push({ level: "warn", msg });
 
-  log("Starting Google Sheets connection debug...");
+  const sessionId = crypto.randomUUID();
+  info(`Debug session started: ${sessionId}`);
+  info(`Client IP: ${req.ip || req.headers["x-forwarded-for"]}`);
 
-  // 1. Check env vars
-  log(`GOOGLE_CLIENT_EMAIL: ${process.env.GOOGLE_CLIENT_EMAIL ? "OK" : "MISSING"}`);
-  log(`GOOGLE_SHEET_ID: ${process.env.GOOGLE_SHEET_ID ? "OK" : "MISSING"}`);
-  log(`SHEET_NAME: ${process.env.SHEET_NAME || "Responses (default)"}`);
-  log(`GOOGLE_PRIVATE_KEY: ${!!process.env.GOOGLE_PRIVATE_KEY ? "Present" : "MISSING"}`);
-
-  if (!process.env.GOOGLE_PRIVATE_KEY || !process.env.GOOGLE_CLIENT_EMAIL || !process.env.GOOGLE_SHEET_ID) {
-    return res.status(500).json({ error: "Missing required env vars", logs });
+  // Security check
+  if (req.query.key !== DEBUG_KEY) {
+    fatal("Unauthorized – append ?key=YOUR_DEBUG_KEY");
+    return res.status(401).json({ success: false, logs });
   }
 
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n");
+  // Structured step 1: Validate ENV vars
+  info("STEP 1 — Checking environment variables...");
 
-  // 2. Authenticate
+  const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
+  const rawKey = process.env.GOOGLE_PRIVATE_KEY;
+  const sheetId = process.env.GOOGLE_SHEET_ID;
+  const sheetName = process.env.SHEET_NAME || "Responses";
+
+  info(`GOOGLE_CLIENT_EMAIL: ${clientEmail ? "OK" : "❌ MISSING"}`);
+  info(`GOOGLE_SHEET_ID: ${sheetId ? "OK" : "❌ MISSING"}`);
+  info(`SHEET_NAME: ${sheetName}`);
+  info(`GOOGLE_PRIVATE_KEY: ${rawKey ? "Present" : "❌ MISSING"}`);
+
+  if (!clientEmail || !rawKey || !sheetId) {
+    fatal("Missing required env vars (client_email, private_key, sheet_id)");
+    return res.status(500).json({ success: false, logs });
+  }
+
+  // Check for formatting issues
+  if (rawKey.includes("-----BEGIN PRIVATE KEY-----") === false) {
+    fatal("Private key does not include BEGIN/END lines — corrupted env var");
+  }
+
+  if (rawKey.includes("\n")) {
+    warn("Private key contains REAL newline characters — invalid for Vercel env vars");
+  }
+  if (rawKey.includes("\\n")) {
+    info("Private key contains escaped \\n — looks correct for Vercel format");
+  }
+
+  // Convert \n → real line breaks
+  const privateKey = rawKey.replace(/\\n/g, "\n");
+
+  // Validate key length
+  if (privateKey.length < 1000) {
+    warn(`Private key is suspiciously short (${privateKey.length} chars). Possible truncation.`);
+  }
+
+  info("STEP 2 — Authenticating with Google...");
+
+  // Use lower-level JWT for clearer error reporting
   let jwtClient;
   try {
     jwtClient = new google.auth.JWT(
-      process.env.GOOGLE_CLIENT_EMAIL,
+      clientEmail.trim(),
       null,
       privateKey,
       ["https://www.googleapis.com/auth/spreadsheets"]
     );
+
     await jwtClient.authorize();
-    log("Authentication successful");
+    info("✔ Authentication successful");
   } catch (err) {
-    log(`Authentication FAILED: ${err.message}`);
-    return res.status(500).json({ logs });
+    fatal(`❌ AUTH FAILED: ${err.message}`);
+    if (err.message.includes("private key")) {
+      warn("Likely caused by wrong formatting or invisible characters.");
+    }
+    if (err.message.includes("keyFile")) {
+      warn("Your private key is EMPTY or NOT being passed correctly.");
+    }
+    return res.status(500).json({ success: false, logs });
   }
 
   const sheets = google.sheets({ version: "v4", auth: jwtClient });
-  const spreadsheetId = process.env.GOOGLE_SHEET_ID;
-  const sheetName = process.env.SHEET_NAME || "Responses";
 
-  // 3. Test spreadsheet access
+  info("STEP 3 — Checking spreadsheet access...");
+
   try {
-    const meta = await sheets.spreadsheets.get({ spreadsheetId });
-    log(`Spreadsheet found: "${meta.data.properties.title}"`);
+    const meta = await sheets.spreadsheets.get({ spreadsheetId: sheetId });
+    info(`✔ Spreadsheet found: "${meta.data.properties.title}"`);
   } catch (err) {
-    log(`Spreadsheet access FAILED: ${err.message}`);
-    log("Fix: Share the Google Sheet with your service account email!");
-    return res.status(500).json({ logs });
+    fatal(`❌ Spreadsheet access FAILED: ${err.message}`);
+
+    if (err.message.includes("403")) {
+      warn("Your service account DOES NOT HAVE ACCESS to the Sheet.");
+      warn(`Share this sheet with: ${clientEmail}`);
+    }
+
+    return res.status(500).json({ success: false, logs });
   }
 
-  // 4. Test sheet tab
+  info("STEP 4 — Checking sheet tab access...");
+
   try {
     await sheets.spreadsheets.values.get({
-      spreadsheetId,
+      spreadsheetId: sheetId,
       range: `${sheetName}!A1:Z1`,
     });
-    log(`Sheet tab "${sheetName}" is readable`);
+
+    info(`✔ Sheet tab "${sheetName}" is readable`);
   } catch (err) {
-    log(`Sheet tab "${sheetName}" FAILED: ${err.message}`);
-    log("Fix: Check tab name spelling or share permissions");
-    return res.status(500).json({ logs });
+    fatal(`❌ Sheet tab "${sheetName}" FAILED: ${err.message}`);
+
+    if (err.message.includes("Unable to parse range")) {
+      warn("Tab name does NOT exist or contains hidden characters.");
+    }
+
+    return res.status(500).json({ success: false, logs });
   }
 
-  log("ALL TESTS PASSED – Google Sheets is 100% configured!");
-  res.json({ success: true, logs });
+  info("🎉 ALL TESTS PASSED — Google Sheets is fully operational!");
+  return res.json({ success: true, sessionId, logs });
 });
 
 // ──────────────────────────────────────────────────────────────
