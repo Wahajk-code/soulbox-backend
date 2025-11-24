@@ -12,7 +12,10 @@ const port = process.env.PORT || 3000;
 // Enable CORS for Webflow origin
 app.use(
   cors({
-    origin: "https://soul-box.webflow.io",
+  origin: [
+    'https://soul-box.webflow.io',
+    'https://soulboxed.com',
+  ],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
   })
