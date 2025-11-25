@@ -20,30 +20,30 @@ const HEADERS = [
   "arc.system",
   "arc.label",
   "arc.rule_fired",
-  "desire.genre_calling.value", // FIX: Added .value
-  "desire.genre_flavour.value", // FIX: Added .value
-  "desire.genre_subflavour.value", // FIX: Added .value
-  "desire.tone.value", // FIX: Added .value
-  "desire.pacing.value", // FIX: Added .value
-  "desire.literary_depth.value", // FIX: Added .value
-  "desire.plot_bias.value", // FIX: Added .value
-  "desire.sensitivity.value", // FIX: Added .value
+  "desire.genre_calling.value",
+  "desire.genre_flavour.value",
+  "desire.genre_subflavour.value",
+  "desire.tone.value",
+  "desire.pacing.value",
+  "desire.literary_depth.value",
+  "desire.plot_bias.value",
+  "desire.sensitivity.value",
   "cultural_lens.axis_tradition_change.value",
   "cultural_lens.whose_story.value",
   "cultural_lens.protagonist_lens.value",
   "cultural_lens.aggregate",
-  "soul_climate.temperature_primary.tag.value", // FIX: Adjusted path based on frontend structure
-  "soul_climate.temperature_primary.tag.label", // FIX: Adjusted path based on frontend structure
-  "soul_climate.temperature_secondary.whisper_text.value", // FIX: Adjusted path based on frontend structure
-  "soul_climate.temperature_secondary.whisper_text.imageId", // FIX: Adjusted path based on frontend structure (image_id)
-  "soul_climate.posture.final.value", // FIX: Adjusted path based on frontend structure
-  "soul_climate.posture.path.q9a.value", // FIX: Adjusted path based on frontend structure
-  "soul_climate.posture.path.q9b.value", // FIX: Adjusted path based on frontend structure
-  "yearning.cluster_image.value", // FIX: Adjusted path based on frontend structure
-  "yearning.final.value", // FIX: Adjusted path based on frontend structure
-  "yearning.whisper_confirm.value", // FIX: Adjusted path based on frontend structure
+  "soul_climate.temperature_primary.tag.value",
+  "soul_climate.temperature_primary.tag.label",
+  "soul_climate.temperature_secondary.whisper_text.value",
+  "soul_climate.temperature_secondary.whisper_text.imageId", // FIX: Corrected path for image_id
+  "soul_climate.posture.final.value",
+  "soul_climate.posture.path.q9a.value",
+  "soul_climate.posture.path.q9b.value",
+  "yearning.cluster_image.value",
+  "yearning.final.value",
+  "yearning.whisper_confirm.value",
   "reader_context.favourite_books",
-  "reader_context.themes_issues",
+  "reader_context.themes_issues", // This key is ready to receive data from the frontend
   "reader_context.heavy_triggers",
 ];
 // Flatten nested objects (e.g., { arc: { system: 'Healing / Rebirth' } } → { 'arc.system': 'Healing / Rebirth' })
