@@ -10,7 +10,7 @@ const auth = new google.auth.GoogleAuth({
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
-// Define exact headers for the Responses sheet
+// Exact headers — must match 100% with what you want in Sheets
 const HEADERS = [
   "submitted_at",
   "name",
@@ -34,6 +34,7 @@ const HEADERS = [
   "cultural_lens.aggregate",
   "soul_climate.temperature_primary.tag",
   "soul_climate.temperature_primary.whisper_text",
+  "soul_climate.temperature_primary.image_id",
   "soul_climate.temperature_secondary.tag",
   "soul_climate.temperature_secondary.image_id",
   "soul_climate.posture.final",
@@ -47,15 +48,30 @@ const HEADERS = [
   "reader_context.heavy_triggers",
 ];
 
-// Flatten nested objects (e.g., { arc: { system: 'Healing / Rebirth' } } → { 'arc.system': 'Healing / Rebirth' })
+// Smart flattener that extracts .value automatically and handles arrays
 function flattenObject(obj, prefix = "") {
   const flat = {};
+
   for (const [key, value] of Object.entries(obj || {})) {
     const newKey = prefix ? `${prefix}.${key}` : key;
-    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-      Object.assign(flat, flattenObject(value, newKey));
+
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      // Most of your quiz answers have { value: "...", imageId: "..." }
+      if ("value" in value) {
+        flat[newKey] = value.value ?? "";
+        if (value.imageId || value.image_id) {
+          flat[`${newKey}.image_id`] = value.imageId || value.image_id || "";
+        }
+      } else {
+        Object.assign(flat, flattenObject(value, newKey));
+      }
+    } else if (Array.isArray(value)) {
+      flat[newKey] = value
+        .map((item) => (typeof item === "string" ? item : item.value || item.label || ""))
+        .filter(Boolean)
+        .join(" | ");
     } else {
-      flat[newKey] = Array.isArray(value) ? JSON.stringify(value) : value;
+      flat[newKey] = value ?? "";
     }
   }
   return flat;
@@ -63,33 +79,29 @@ function flattenObject(obj, prefix = "") {
 
 async function saveSubmission(submission) {
   try {
-    // Validate required fields
-    if (!submission || !submission.email || !submission.country) {
-      console.error("[SubmissionService] Invalid submission: missing required fields", { submission });
-      return;
+    if (!submission?.email || !submission?.country) {
+      throw new Error("Missing required fields");
     }
 
-    const sheetsClient = await auth.getClient();
+    const client = await auth.getClient();
     const spreadsheetId = "1RxdyCRhwYKGp8-fuYlHLhxvrdQTGcGg0bW93KzAuCtk";
     const sheetName = "Sheet1";
-    const range = `${sheetName}!A:AG`; // 33 columns (A to AG)
 
-    // Flatten submission data
-    const flattened = flattenObject(submission);
-    flattened.submitted_at = new Date().toISOString(); // Set timestamp
-    flattened.region = flattened.region || flattened.country; // Mirror country to region
+    // Flatten + ensure top-level fields
+    const data = flattenObject(submission);
+    data.submitted_at = new Date().toISOString();
+    data.region = data.region || data.country;
 
-    // Check if sheet has headers; add if missing
-    const existing = await sheets.spreadsheets.values.get({
-      auth: sheetsClient,
+    // Write headers if missing
+    const headerRes = await sheets.spreadsheets.values.get({
+      auth: client,
       spreadsheetId,
       range: `${sheetName}!A1:AG1`,
     }).catch(() => null);
 
-    if (!existing || !existing.data.values || existing.data.values.length === 0) {
-      console.log("[SubmissionService] Writing headers to Responses sheet");
+    if (!headerRes?.data?.values?.[0]) {
       await sheets.spreadsheets.values.update({
-        auth: sheetsClient,
+        auth: client,
         spreadsheetId,
         range: `${sheetName}!A1:AG1`,
         valueInputOption: "RAW",
@@ -97,26 +109,21 @@ async function saveSubmission(submission) {
       });
     }
 
-    // Prepare row in the exact order of HEADERS
-    const row = HEADERS.map((header) => flattened[header] || "");
-    console.log("[SubmissionService] Appending submission row", {
-      email: "[REDACTED]",
-      submitted_at: flattened.submitted_at,
-      arc_label: flattened["arc.label"],
-    });
+    // Build row exactly in header order
+    const row = HEADERS.map((h) => data[h] ?? "");
 
-    // Append row
     await sheets.spreadsheets.values.append({
-      auth: sheetsClient,
+      auth: client,
       spreadsheetId,
-      range,
+      range: `${sheetName}!A:AG`,
       valueInputOption: "RAW",
       resource: { values: [row] },
     });
 
-    console.log("[SubmissionService] Submission saved successfully");
+    console.log("Submission saved to Google Sheets", { email: submission.email });
   } catch (error) {
-    console.error("[SubmissionService] Failed to save submission to Google Sheets:", error.message);
+    console.error("Failed to save to Sheets:", error.message);
+    throw error;
   }
 }
 
