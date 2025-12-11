@@ -45,6 +45,9 @@ const HEADERS = [
   "yearning.whisper_confirm",
   "reader_context.favourite_books",
   "reader_context.themes_issues",
+  "reader_context.reading_habits",
+  "reader_context.favourite_book",
+  "reader_context.issues_struggles",
   "reader_context.heavy_triggers",
 ];
 
@@ -82,6 +85,9 @@ const FALLBACK_PATHS = {
   "yearning.cluster_image": ["yearning.cluster_image.value"],
   "yearning.final": ["yearning.final.value"],
   "yearning.whisper_confirm": ["yearning.whisper_confirm.value"],
+  "reader_context.reading_habits": ["reader_context.reading_habits"],
+  "reader_context.favourite_book": ["reader_context.favourite_book"],
+  "reader_context.issues_struggles": ["reader_context.issues_struggles"],
 };
 // Flatten nested objects (e.g., { arc: { system: 'Healing / Rebirth' } } → { 'arc.system': 'Healing / Rebirth' })
 function flattenObject(obj, prefix = "") {
@@ -106,7 +112,7 @@ async function saveSubmission(submission) {
     const sheetsClient = await auth.getClient();
     const spreadsheetId = "1RxdyCRhwYKGp8-fuYlHLhxvrdQTGcGg0bW93KzAuCtk";
     const sheetName = "Sheet1";
-    const range = `${sheetName}!A:AH`; // 34 columns (A to AH)
+    const range = `${sheetName}!A:AK`; // 37 columns (A to AK)
     // Flatten submission data
     const flattened = flattenObject(submission);
     flattened.submitted_at = new Date().toISOString(); // Set timestamp
@@ -116,7 +122,7 @@ async function saveSubmission(submission) {
       .get({
         auth: sheetsClient,
         spreadsheetId,
-        range: `${sheetName}!A1:AH1`,
+        range: `${sheetName}!A1:AK1`,
       })
       .catch(() => null);
 
