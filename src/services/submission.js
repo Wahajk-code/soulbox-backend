@@ -12,39 +12,40 @@ const auth = new google.auth.GoogleAuth({
 
 // Define exact headers for the Responses sheet
 const HEADERS = [
-  "submitted_at",
-  "name",
-  "email",
-  "country",
-  "region",
-  "arc.system",
-  "arc.label",
-  "arc.rule_fired",
-  "desire.genre_calling.value",
-  "desire.genre_flavour.value",
-  "desire.genre_subflavour.value",
-  "desire.tone.value",
-  "desire.pacing.value",
-  "desire.literary_depth.value",
-  "desire.plot_bias.value",
-  "desire.sensitivity.value",
-  "cultural_lens.axis_tradition_change.value",
-  "cultural_lens.whose_story.value",
-  "cultural_lens.protagonist_lens.value",
-  "cultural_lens.aggregate",
-  "soul_climate.temperature_primary.tag.value",
-  "soul_climate.temperature_primary.tag.label",
-  "soul_climate.temperature_secondary.whisper_text.value",
-  "soul_climate.temperature_secondary.whisper_text.imageId", // FIX: Corrected path for image_id
-  "soul_climate.posture.final.value",
-  "soul_climate.posture.path.q9a.value",
-  "soul_climate.posture.path.q9b.value",
-  "yearning.cluster_image.value",
-  "yearning.final.value",
-  "yearning.whisper_confirm.value",
-  "reader_context.favourite_books",
-  "reader_context.themes_issues", // This key is ready to receive data from the frontend
-  "reader_context.heavy_triggers",
+  "submitted_at",
+  "name",
+  "email",
+  "country",
+  "region",
+  "arc.system",
+  "arc.label",
+  "arc.rule_fired",
+  "desire.genre_calling.value",
+  "desire.genre_flavour.value",
+  "desire.genre_subflavour.value",
+  "desire.genre_visual.value",
+  "desire.tone.value",
+  "desire.pacing.value",
+  "desire.literary_depth.value",
+  "desire.plot_bias.value",
+  "desire.sensitivity.value",
+  "cultural_lens.axis_tradition_change.value",
+  "cultural_lens.whose_story.value",
+  "cultural_lens.protagonist_lens.value",
+  "cultural_lens.aggregate",
+  "soul_climate.temperature_primary.tag.value",
+  "soul_climate.temperature_primary.tag.label",
+  "soul_climate.temperature_secondary.whisper_text.value",
+  "soul_climate.temperature_secondary.whisper_text.imageId", // FIX: Corrected path for image_id
+  "soul_climate.posture.final.value",
+  "soul_climate.posture.path.q9a.value",
+  "soul_climate.posture.path.q9b.value",
+  "yearning.cluster_image.value",
+  "yearning.final.value",
+  "yearning.whisper_confirm.value",
+  "reader_context.favourite_books",
+  "reader_context.themes_issues", // This key is ready to receive data from the frontend
+  "reader_context.heavy_triggers",
 ];
 // Flatten nested objects (e.g., { arc: { system: 'Healing / Rebirth' } } → { 'arc.system': 'Healing / Rebirth' })
 function flattenObject(obj, prefix = "") {
@@ -69,23 +70,32 @@ async function saveSubmission(submission) {
     const sheetsClient = await auth.getClient();
     const spreadsheetId = "1RxdyCRhwYKGp8-fuYlHLhxvrdQTGcGg0bW93KzAuCtk";
     const sheetName = "Sheet1";
-    const range = `${sheetName}!A:AG`; // 33 columns (A to AG)
+    const range = `${sheetName}!A:AH`; // 34 columns (A to AH)
     // Flatten submission data
     const flattened = flattenObject(submission);
     flattened.submitted_at = new Date().toISOString(); // Set timestamp
     flattened.region = flattened.region || flattened.country; // Mirror country to region
     // Check if sheet has headers; add if missing
-    const existing = await sheets.spreadsheets.values.get({
-      auth: sheetsClient,
-      spreadsheetId,
-      range: `${sheetName}!A1:AG1`,
-    }).catch(() => null);
-    if (!existing || !existing.data.values || existing.data.values.length === 0) {
-      console.log("[SubmissionService] Writing headers to Responses sheet");
+    const existing = await sheets.spreadsheets.values
+      .get({
+        auth: sheetsClient,
+        spreadsheetId,
+        range: `${sheetName}!A1:AH1`,
+      })
+      .catch(() => null);
+
+    const existingHeaders = existing?.data?.values?.[0] || [];
+    const headersMissing = existingHeaders.length === 0;
+    const headersMismatch = existingHeaders.length !== HEADERS.length;
+
+    if (headersMissing || headersMismatch) {
+      console.log(
+        `[SubmissionService] Writing headers to Responses sheet${headersMismatch ? " (updating layout)" : ""}`
+      );
       await sheets.spreadsheets.values.update({
         auth: sheetsClient,
         spreadsheetId,
-        range: `${sheetName}!A1:AG1`,
+        range: `${sheetName}!A1:AH1`,
         valueInputOption: "RAW",
         resource: { values: [HEADERS] },
       });
