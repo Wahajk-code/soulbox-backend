@@ -10,7 +10,7 @@ const auth = new google.auth.GoogleAuth({
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
-// Define exact headers for the Responses sheet
+// Define headers to match the current Google Sheet layout
 const HEADERS = [
   "submitted_at",
   "name",
@@ -20,33 +20,69 @@ const HEADERS = [
   "arc.system",
   "arc.label",
   "arc.rule_fired",
-  "desire.genre_calling.value",
-  "desire.genre_flavour.value",
-  "desire.genre_subflavour.value",
-  "desire.genre_visual.value",
-  "desire.tone.value",
-  "desire.pacing.value",
-  "desire.literary_depth.value",
-  "desire.plot_bias.value",
-  "desire.sensitivity.value",
+  "desire.genre_calling",
+  "desire.genre_flavour",
+  "desire.genre_subflavour",
+  "desire.genre_visual",
+  "desire.tone",
+  "desire.pacing",
+  "desire.literary_depth",
+  "desire.plot_bias",
+  "desire.sensitivity",
   "cultural_lens.axis_tradition_change.value",
   "cultural_lens.whose_story.value",
   "cultural_lens.protagonist_lens.value",
   "cultural_lens.aggregate",
-  "soul_climate.temperature_primary.tag.value",
-  "soul_climate.temperature_primary.tag.label",
-  "soul_climate.temperature_secondary.whisper_text.value",
-  "soul_climate.temperature_secondary.whisper_text.imageId", // FIX: Corrected path for image_id
-  "soul_climate.posture.final.value",
-  "soul_climate.posture.path.q9a.value",
-  "soul_climate.posture.path.q9b.value",
-  "yearning.cluster_image.value",
-  "yearning.final.value",
-  "yearning.whisper_confirm.value",
+  "soul_climate.temperature_primary.tag",
+  "soul_climate.temperature_primary.whisper_text",
+  "soul_climate.temperature_secondary.tag",
+  "soul_climate.temperature_secondary.image_id",
+  "soul_climate.posture.final",
+  "soul_climate.posture.path.q9a",
+  "soul_climate.posture.path.q9b",
+  "yearning.cluster_image",
+  "yearning.final",
+  "yearning.whisper_confirm",
   "reader_context.favourite_books",
-  "reader_context.themes_issues", // This key is ready to receive data from the frontend
+  "reader_context.themes_issues",
   "reader_context.heavy_triggers",
 ];
+
+// Map legacy header names to the values in the flattened payload
+const FALLBACK_PATHS = {
+  "desire.genre_calling": ["desire.genre_calling.value"],
+  "desire.genre_flavour": ["desire.genre_flavour.value"],
+  "desire.genre_subflavour": ["desire.genre_subflavour.value"],
+  "desire.genre_visual": ["desire.genre_visual.value"],
+  "desire.tone": ["desire.tone.value"],
+  "desire.pacing": ["desire.pacing.value"],
+  "desire.literary_depth": ["desire.literary_depth.value"],
+  "desire.plot_bias": ["desire.plot_bias.value"],
+  "desire.sensitivity": ["desire.sensitivity.value"],
+  "soul_climate.temperature_primary.tag": [
+    "soul_climate.temperature_primary.tag.value",
+  ],
+  "soul_climate.temperature_primary.whisper_text": [
+    "soul_climate.temperature_primary.whisper_text.value",
+    "soul_climate.temperature_primary.tag.label",
+  ],
+  "soul_climate.temperature_secondary.tag": [
+    "soul_climate.temperature_secondary.whisper_text.value",
+  ],
+  "soul_climate.temperature_secondary.image_id": [
+    "soul_climate.temperature_secondary.whisper_text.imageId",
+  ],
+  "soul_climate.posture.final": ["soul_climate.posture.final.value"],
+  "soul_climate.posture.path.q9a": [
+    "soul_climate.posture.path.q9a.value",
+  ],
+  "soul_climate.posture.path.q9b": [
+    "soul_climate.posture.path.q9b.value",
+  ],
+  "yearning.cluster_image": ["yearning.cluster_image.value"],
+  "yearning.final": ["yearning.final.value"],
+  "yearning.whisper_confirm": ["yearning.whisper_confirm.value"],
+};
 // Flatten nested objects (e.g., { arc: { system: 'Healing / Rebirth' } } → { 'arc.system': 'Healing / Rebirth' })
 function flattenObject(obj, prefix = "") {
   const flat = {};
@@ -101,7 +137,16 @@ async function saveSubmission(submission) {
       });
     }
     // Prepare row in the exact order of HEADERS
-    const row = HEADERS.map((header) => flattened[header] || "");
+    const getValue = (header) => {
+      if (flattened[header]) return flattened[header];
+      const fallbacks = FALLBACK_PATHS[header] || [];
+      for (const fb of fallbacks) {
+        if (flattened[fb]) return flattened[fb];
+      }
+      return "";
+    };
+
+    const row = HEADERS.map((header) => getValue(header));
     console.log("[SubmissionService] Appending submission row", {
       email: "[REDACTED]",
       submitted_at: flattened.submitted_at,
