@@ -43,8 +43,7 @@ const HEADERS = [
   "yearning.cluster_image",
   "yearning.final",
   "yearning.whisper_confirm",
-  "reader_context.favourite_books",
-  "reader_context.themes_issues",
+  // Reader context (only the four collected fields)
   "reader_context.reading_habits",
   "reader_context.favourite_book",
   "reader_context.issues_struggles",
@@ -85,9 +84,18 @@ const FALLBACK_PATHS = {
   "yearning.cluster_image": ["yearning.cluster_image.value"],
   "yearning.final": ["yearning.final.value"],
   "yearning.whisper_confirm": ["yearning.whisper_confirm.value"],
-  "reader_context.reading_habits": ["reader_context.reading_habits"],
-  "reader_context.favourite_book": ["reader_context.favourite_book"],
-  "reader_context.issues_struggles": ["reader_context.issues_struggles"],
+  "reader_context.reading_habits": [
+    "reader_context.reading_habits",
+    "reader_context.reading_habits.value",
+  ],
+  "reader_context.favourite_book": [
+    "reader_context.favourite_book",
+    "reader_context.favourite_book.value",
+  ],
+  "reader_context.issues_struggles": [
+    "reader_context.issues_struggles",
+    "reader_context.issues_struggles.value",
+  ],
 };
 // Flatten nested objects (e.g., { arc: { system: 'Healing / Rebirth' } } → { 'arc.system': 'Healing / Rebirth' })
 function flattenObject(obj, prefix = "") {
@@ -112,7 +120,7 @@ async function saveSubmission(submission) {
     const sheetsClient = await auth.getClient();
     const spreadsheetId = "1RxdyCRhwYKGp8-fuYlHLhxvrdQTGcGg0bW93KzAuCtk";
     const sheetName = "Sheet1";
-    const range = `${sheetName}!A:AK`; // 37 columns (A to AK)
+    const range = `${sheetName}!A:AI`; // 35 columns (A to AI)
     // Flatten submission data
     const flattened = flattenObject(submission);
     flattened.submitted_at = new Date().toISOString(); // Set timestamp
@@ -122,7 +130,7 @@ async function saveSubmission(submission) {
       .get({
         auth: sheetsClient,
         spreadsheetId,
-        range: `${sheetName}!A1:AK1`,
+        range: `${sheetName}!A1:AI1`,
       })
       .catch(() => null);
 
@@ -137,7 +145,7 @@ async function saveSubmission(submission) {
       await sheets.spreadsheets.values.update({
         auth: sheetsClient,
         spreadsheetId,
-        range: `${sheetName}!A1:AH1`,
+        range: `${sheetName}!A1:AI1`,
         valueInputOption: "RAW",
         resource: { values: [HEADERS] },
       });
