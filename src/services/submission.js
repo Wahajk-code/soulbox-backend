@@ -44,9 +44,9 @@ const HEADERS = [
   "yearning.final",
   "yearning.whisper_confirm",
   // Reader context (only the four collected fields)
-  "reader_context.reading_habits",
-  "reader_context.favourite_book",
+  "reader_context.favourite_books",
   "reader_context.issues_struggles",
+  "reader_context.reading_habits",
   "reader_context.heavy_triggers",
 ];
 
@@ -84,13 +84,15 @@ const FALLBACK_PATHS = {
   "yearning.cluster_image": ["yearning.cluster_image.value"],
   "yearning.final": ["yearning.final.value"],
   "yearning.whisper_confirm": ["yearning.whisper_confirm.value"],
+  "reader_context.favourite_books": [
+    "reader_context.favourite_books",
+    "reader_context.favourite_books.value",
+    "reader_context.favourite_book",
+    "reader_context.favourite_book.value",
+  ],
   "reader_context.reading_habits": [
     "reader_context.reading_habits",
     "reader_context.reading_habits.value",
-  ],
-  "reader_context.favourite_book": [
-    "reader_context.favourite_book",
-    "reader_context.favourite_book.value",
   ],
   "reader_context.issues_struggles": [
     "reader_context.issues_struggles",
