@@ -15,17 +15,24 @@ mailchimp.setConfig({
 });
 const PLANS = {
   monthly: {
-    type: "inline", // temporary
+    type: "inline",
     mode: "subscription",
   },
+
   bimonthly: {
     type: "price",
     priceId: "price_1SgpfCFHbt8VjRVzdlSvDSTn",
     mode: "subscription",
   },
+
   onetime: {
     type: "price",
     priceId: "price_1SgpeSFHbt8VjRVzkuAj13DD",
+    mode: "payment",
+  },
+
+  report: {
+    type: "inline",
     mode: "payment",
   },
 };
@@ -262,36 +269,54 @@ router.get("/soul-report/:arcLabel", async (req, res) => {
 
 router.post("/create-checkout-session", async (req, res) => {
   try {
-    const { plan, email } = req.body;
+    const { plan, email, submission } = req.body;
 
     if (!PLANS[plan]) {
       return res.status(400).json({ error: "Invalid plan" });
     }
 
     const config = PLANS[plan];
-
     let line_items;
 
-    // ✅ MONTHLY — inline price_data (temporary)
+    // 🔁 INLINE PRICES
     if (config.type === "inline") {
-      line_items = [
-        {
-          price_data: {
-            currency: "gbp",
-            product_data: {
-              name: "SoulBox — Monthly Journey",
+      // Monthly subscription
+      if (plan === "monthly") {
+        line_items = [
+          {
+            price_data: {
+              currency: "gbp",
+              product_data: {
+                name: "SoulBox — Monthly Journey",
+              },
+              unit_amount: 5500,
+              recurring: { interval: "month" },
             },
-            unit_amount: 5500,
-            recurring: {
-              interval: "month",
-            },
+            quantity: 1,
           },
-          quantity: 1,
-        },
-      ];
+        ];
+      }
+
+      // Soul Report — one-time USD
+      if (plan === "report") {
+        line_items = [
+          {
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: "Soul Report",
+                description:
+                  "A personalized, curator-written Soul Report delivered by email.",
+              },
+              unit_amount: 2900, // $29.00
+            },
+            quantity: 1,
+          },
+        ];
+      }
     }
 
-    // ✅ BIMONTHLY & ONETIME — price_id
+    // 🔐 PRICE ID PLANS
     if (config.type === "price") {
       line_items = [
         {
@@ -301,12 +326,18 @@ router.post("/create-checkout-session", async (req, res) => {
       ];
     }
 
+    const origin = req.headers.origin;
+
     const session = await stripe.checkout.sessions.create({
       ...(email && { customer_email: email }),
       mode: config.mode,
       line_items,
-      success_url: `${req.headers.origin}/thank-you-purchase?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.origin}/triad-reveal`,
+      success_url: `${origin}/thank-you-purchase?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/triad-reveal`,
+      metadata: {
+        plan,
+        ...(submission && { submissionId: submission.id || "local" }),
+      },
     });
 
     res.json({ id: session.id });
