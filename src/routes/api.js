@@ -306,7 +306,7 @@ router.post("/create-checkout-session", async (req, res) => {
       mode: config.mode,
       line_items,
       success_url: `${req.headers.origin}/thank-you-purchase?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.originigin}/triad-reveal`,
+      cancel_url: `${req.headers.origin}/triad-reveal`,
     });
 
     res.json({ id: session.id });
