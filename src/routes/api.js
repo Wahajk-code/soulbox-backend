@@ -13,7 +13,20 @@ mailchimp.setConfig({
   apiKey: process.env.MAILCHIMP_API_KEY,
   server: process.env.MAILCHIMP_API_KEY.split("-")[1],
 });
-
+const PLANS = {
+  monthly: {
+    priceId: "price_1SgpfCFHbt8VjRVzdlSvDSTn", // add when ready
+    mode: "subscription",
+  },
+  bimonthly: {
+    priceId: "price_1SgpfCFHbt8VjRVzdlSvDSTn",
+    mode: "subscription",
+  },
+  onetime: {
+    priceId: "price_1SgpeSFHbt8VjRVzkuAj13DD",
+    mode: "payment",
+  },
+};
 // ──────────────────────────────────────────────────────────────
 // Arc calculation function (unchanged)
 // ──────────────────────────────────────────────────────────────
@@ -22,11 +35,11 @@ function calcArc({ temperature, posture, yearning }) {
     "Healing / Rebirth": "Heal and Rebirth",
     "Belonging / Connection": "Belong",
     "Liberation / Reckoning": "Liberty",
-    "Becoming": "Becoming",
-    "Acceptance": "Acceptance",
-    "Redemption": "Redemption",
+    Becoming: "Becoming",
+    Acceptance: "Acceptance",
+    Redemption: "Redemption",
     "Exploration / Awakening": "Horizon",
-    "Mastery": "Mastery",
+    Mastery: "Mastery",
     "Harmony / Sustaining": "Keeper",
     "Confronting the Shadow": "Confronting the Shadow",
   };
@@ -34,70 +47,149 @@ function calcArc({ temperature, posture, yearning }) {
   const r1Temps = new Set(["Ashamed", "Bitter", "Numb", "Anxious"]);
   const r1Posts = new Set(["Guarded", "People-Pleasing"]);
   const r1Yearn = new Set(["To belong", "To be loved", "To be seen"]);
-  if ((r1Temps.has(temperature) || r1Posts.has(posture)) && r1Yearn.has(yearning)) {
+  if (
+    (r1Temps.has(temperature) || r1Posts.has(posture)) &&
+    r1Yearn.has(yearning)
+  ) {
     const arc = "Confronting the Shadow";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 1 — Internal Barrier" };
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 1 — Internal Barrier",
+    };
   }
   if (temperature === "Grieving") {
     const arc = "Healing / Rebirth";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 2 — Grieving" };
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 2 — Grieving",
+    };
   }
-  if (temperature === "Numb" && (yearning === "To feel worthy" || yearning === "To feel peace")) {
+  if (
+    temperature === "Numb" &&
+    (yearning === "To feel worthy" || yearning === "To feel peace")
+  ) {
     const arc = "Healing / Rebirth";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 2 — Numb + (Worthy/Peace)" };
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 2 — Numb + (Worthy/Peace)",
+    };
   }
   if (temperature === "Ashamed" && yearning === "To feel worthy") {
     const arc = "Healing / Rebirth";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 2 — Ashamed + Worthy" };
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 2 — Ashamed + Worthy",
+    };
   }
   if (temperature === "Ashamed" && yearning === "To redeem") {
     const arc = "Redemption";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 2 — Ashamed + Redeem" };
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 2 — Ashamed + Redeem",
+    };
   }
   if (posture === "Rebellious" && yearning === "To change") {
     const arc = "Liberation / Reckoning";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 3 — Rebellious + Change" };
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 3 — Rebellious + Change",
+    };
   }
   if (posture === "Rebellious" && yearning === "To feel peace") {
     if (["Anxious", "Restless"].includes(temperature)) {
       const arc = "Liberation / Reckoning";
-      return { system: arc, label: labelMap[arc], rule_fired: "Rule 3 — Rebellious + Peace + Anxious/Restless" };
+      return {
+        system: arc,
+        label: labelMap[arc],
+        rule_fired: "Rule 3 — Rebellious + Peace + Anxious/Restless",
+      };
     }
     if (["Grieving", "Numb"].includes(temperature)) {
       const arc = "Acceptance";
-      return { system: arc, label: labelMap[arc], rule_fired: "Rule 3 — Rebellious + Peace + Grieving/Numb" };
+      return {
+        system: arc,
+        label: labelMap[arc],
+        rule_fired: "Rule 3 — Rebellious + Peace + Grieving/Numb",
+      };
     }
   }
-  if (posture === "Resigned" && (yearning === "To be free" || yearning === "To change")) {
-    if (["Grieving", "Numb", "Ashamed", "Bitter", "Anxious"].includes(temperature)) {
+  if (
+    posture === "Resigned" &&
+    (yearning === "To be free" || yearning === "To change")
+  ) {
+    if (
+      ["Grieving", "Numb", "Ashamed", "Bitter", "Anxious"].includes(temperature)
+    ) {
       const arc = "Healing / Rebirth";
-      return { system: arc, label: labelMap[arc], rule_fired: "Rule 3 — Resigned + (Free/Change) + heavy temps" };
+      return {
+        system: arc,
+        label: labelMap[arc],
+        rule_fired: "Rule 3 — Resigned + (Free/Change) + heavy temps",
+      };
     }
     if (["Hopeful", "Searching", "Restless"].includes(temperature)) {
       const arc = "Becoming";
-      return { system: arc, label: labelMap[arc], rule_fired: "Rule 3 — Resigned + (Free/Change) + light temps" };
+      return {
+        system: arc,
+        label: labelMap[arc],
+        rule_fired: "Rule 3 — Resigned + (Free/Change) + light temps",
+      };
     }
   }
   if (posture === "Controlling" && yearning === "To be free") {
     const arc = "Liberation / Reckoning";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 3 — Controlling + Free" };
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 3 — Controlling + Free",
+    };
   }
   if (posture === "Controlling" && yearning === "To feel peace") {
     const arc = "Acceptance";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 3 — Controlling + Peace" };
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 3 — Controlling + Peace",
+    };
   }
   if (posture === "People-Pleasing" && yearning === "To feel worthy") {
     const arc = "Becoming";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 3 — People-Pleasing + Worthy" };
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 3 — People-Pleasing + Worthy",
+    };
   }
   if (posture === "Controlling" && yearning === "To belong") {
     const arc = "Acceptance";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 3 — Controlling + Belong" };
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 3 — Controlling + Belong",
+    };
   }
-  if ((["Restless", "Searching", "Anxious"].includes(temperature) || posture === "Seeker") &&
-      (yearning === "To change" || yearning === "To discover" || yearning === "To be free")) {
-    const arc = (yearning === "To discover") ? "Exploration / Awakening" : "Liberation / Reckoning";
-    return { system: arc, label: labelMap[arc], rule_fired: "Rule 4 — Energy of Motion" };
+  if (
+    (["Restless", "Searching", "Anxious"].includes(temperature) ||
+      posture === "Seeker") &&
+    (yearning === "To change" ||
+      yearning === "To discover" ||
+      yearning === "To be free")
+  ) {
+    const arc =
+      yearning === "To discover"
+        ? "Exploration / Awakening"
+        : "Liberation / Reckoning";
+    return {
+      system: arc,
+      label: labelMap[arc],
+      rule_fired: "Rule 4 — Energy of Motion",
+    };
   }
   const baseline = {
     "To feel worthy": "Healing / Rebirth",
@@ -124,7 +216,9 @@ router.post("/calculate-arc", async (req, res) => {
     const { temperature, posture, yearning } = req.body;
     console.log(`[API] Calculating arc: ${temperature}-${posture}-${yearning}`);
     if (!temperature || !posture || !yearning) {
-      return res.status(400).json({ ok: false, error: "Missing required fields" });
+      return res
+        .status(400)
+        .json({ ok: false, error: "Missing required fields" });
     }
     const arc = calcArc({ temperature, posture, yearning });
     res.json(arc);
@@ -138,7 +232,10 @@ router.post("/submit", async (req, res) => {
   try {
     let submission = req.body;
     if (submission.quizState) {
-      submission = { ...submission.quizState, submitted_at: new Date().toISOString() };
+      submission = {
+        ...submission.quizState,
+        submitted_at: new Date().toISOString(),
+      };
     } else {
       submission.submitted_at = new Date().toISOString();
     }
@@ -163,52 +260,52 @@ router.get("/soul-report/:arcLabel", async (req, res) => {
 
 router.post("/create-checkout-session", async (req, res) => {
   try {
-    const { email, product } = req.body;
+    const { plan, email } = req.body;
+    const { priceId, mode } = PLANS[plan];
+
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      customer_email: email,
-      line_items: [{
-        price_data: {
-          currency: product.currency,
-          product_data: { name: product.name },
-          unit_amount: product.amount,
-          ...(product.recurring && { recurring: product.recurring }),
-        },
-        quantity: 1,
-      }],
-      mode: product.recurring ? "subscription" : "payment",
+      ...(email && { customer_email: email }),
+      line_items: [{ price: priceId, quantity: 1 }],
+      mode,
       success_url: `${req.headers.origin}/thank-you-purchase?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.origin}/triad-reveal`,
     });
+
     res.json({ id: session.id });
-  } catch (error) {
-    console.error("Stripe error:", error);
-    res.status(500).json({ ok: false, error: error.message });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
 router.post("/mailchimp-subscribe", async (req, res) => {
   try {
     const { email, tags = ["Waitlist"] } = req.body;
-    if (!process.env.MAILCHIMP_AUDIENCE_ID || process.env.MAILCHIMP_AUDIENCE_ID === "xxxxxxxxxx") {
+    if (
+      !process.env.MAILCHIMP_AUDIENCE_ID ||
+      process.env.MAILCHIMP_AUDIENCE_ID === "xxxxxxxxxx"
+    ) {
       throw new Error("Mailchimp Audience ID is not configured");
     }
-    const response = await mailchimp.lists.addListMember(process.env.MAILCHIMP_AUDIENCE_ID, {
-      email_address: email,
-      status: "subscribed",
-      tags,
-    });
+    const response = await mailchimp.lists.addListMember(
+      process.env.MAILCHIMP_AUDIENCE_ID,
+      {
+        email_address: email,
+        status: "subscribed",
+        tags,
+      }
+    );
     res.json({ ok: true, id: response.id });
   } catch (error) {
     console.error("Mailchimp error:", error);
-    res.status(500).json({ ok: false, error: error.response?.body?.title || error.message });
+    res
+      .status(500)
+      .json({ ok: false, error: error.response?.body?.title || error.message });
   }
 });
 
 // ──────────────────────────────────────────────────────────────
 // DEBUG SHEETS ROUTE – ADDED HERE
 // ──────────────────────────────────────────────────────────────
-
 
 router.get("/debug-sheets", async (req, res) => {
   const DEBUG_KEY = process.env.DEBUG_SHEETS_KEY || "test123";
@@ -251,7 +348,9 @@ router.get("/debug-sheets", async (req, res) => {
   }
 
   if (rawKey.includes("\n")) {
-    warn("Private key contains REAL newline characters — invalid for Vercel env vars");
+    warn(
+      "Private key contains REAL newline characters — invalid for Vercel env vars"
+    );
   }
   if (rawKey.includes("\\n")) {
     info("Private key contains escaped \\n — looks correct for Vercel format");
@@ -262,7 +361,9 @@ router.get("/debug-sheets", async (req, res) => {
 
   // Validate key length
   if (privateKey.length < 1000) {
-    warn(`Private key is suspiciously short (${privateKey.length} chars). Possible truncation.`);
+    warn(
+      `Private key is suspiciously short (${privateKey.length} chars). Possible truncation.`
+    );
   }
 
   info("STEP 2 — Authenticating with Google...");
@@ -270,12 +371,9 @@ router.get("/debug-sheets", async (req, res) => {
   // Use lower-level JWT for clearer error reporting
   let jwtClient;
   try {
-    jwtClient = new google.auth.JWT(
-      clientEmail.trim(),
-      null,
-      privateKey,
-      ["https://www.googleapis.com/auth/spreadsheets"]
-    );
+    jwtClient = new google.auth.JWT(clientEmail.trim(), null, privateKey, [
+      "https://www.googleapis.com/auth/spreadsheets",
+    ]);
 
     await jwtClient.authorize();
     info("✔ Authentication successful");
