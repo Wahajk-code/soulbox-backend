@@ -15,14 +15,16 @@ mailchimp.setConfig({
 });
 const PLANS = {
   monthly: {
-    priceId: "price_1SgpfCFHbt8VjRVzdlSvDSTn", // add when ready
+    type: "inline", // temporary
     mode: "subscription",
   },
   bimonthly: {
+    type: "price",
     priceId: "price_1SgpfCFHbt8VjRVzdlSvDSTn",
     mode: "subscription",
   },
   onetime: {
+    type: "price",
     priceId: "price_1SgpeSFHbt8VjRVzkuAj13DD",
     mode: "payment",
   },
@@ -261,18 +263,55 @@ router.get("/soul-report/:arcLabel", async (req, res) => {
 router.post("/create-checkout-session", async (req, res) => {
   try {
     const { plan, email } = req.body;
-    const { priceId, mode } = PLANS[plan];
+
+    if (!PLANS[plan]) {
+      return res.status(400).json({ error: "Invalid plan" });
+    }
+
+    const config = PLANS[plan];
+
+    let line_items;
+
+    // ✅ MONTHLY — inline price_data (temporary)
+    if (config.type === "inline") {
+      line_items = [
+        {
+          price_data: {
+            currency: "gbp",
+            product_data: {
+              name: "SoulBox — Monthly Journey",
+            },
+            unit_amount: 5500,
+            recurring: {
+              interval: "month",
+            },
+          },
+          quantity: 1,
+        },
+      ];
+    }
+
+    // ✅ BIMONTHLY & ONETIME — price_id
+    if (config.type === "price") {
+      line_items = [
+        {
+          price: config.priceId,
+          quantity: 1,
+        },
+      ];
+    }
 
     const session = await stripe.checkout.sessions.create({
       ...(email && { customer_email: email }),
-      line_items: [{ price: priceId, quantity: 1 }],
-      mode,
+      mode: config.mode,
+      line_items,
       success_url: `${req.headers.origin}/thank-you-purchase?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.origin}/triad-reveal`,
+      cancel_url: `${req.headers.originigin}/triad-reveal`,
     });
 
     res.json({ id: session.id });
   } catch (err) {
+    console.error("Stripe error:", err);
     res.status(500).json({ error: err.message });
   }
 });
