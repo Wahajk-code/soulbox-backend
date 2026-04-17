@@ -27,7 +27,7 @@ const PLANS = {
 
   onetime: {
     type: "price",
-    priceId: "price_1SgpeSFHbt8VjRVzkuAj13DD",
+    priceId: "price_1TNGhUFHbt8VjRVzm009FdTn",
     mode: "payment",
   },
 
