@@ -124,7 +124,7 @@ async function saveSubmission(submission) {
     const sheetsClient = await auth.getClient();
     const spreadsheetId = "1RxdyCRhwYKGp8-fuYlHLhxvrdQTGcGg0bW93KzAuCtk";
     const sheetName = "Sheet1";
-    const range = `${sheetName}!A:AI`; // 35 columns (A to AI)
+   const range = `${sheetName}!A:AJ`;
     // Flatten submission data
     const flattened = flattenObject(submission);
     flattened.submitted_at = new Date().toISOString(); // Set timestamp
@@ -149,8 +149,7 @@ async function saveSubmission(submission) {
       await sheets.spreadsheets.values.update({
         auth: sheetsClient,
         spreadsheetId,
-        range: `${sheetName}!A1:AI1`,
-        valueInputOption: "RAW",
+range: `${sheetName}!A1:AJ1`,        valueInputOption: "RAW",
         resource: { values: [HEADERS] },
       });
     }
