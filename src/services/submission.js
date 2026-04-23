@@ -134,7 +134,7 @@ async function saveSubmission(submission) {
       .get({
         auth: sheetsClient,
         spreadsheetId,
-        range: `${sheetName}!A1:AI1`,
+        range: `${sheetName}!A1:AL1`,
       })
       .catch(() => null);
 
@@ -149,7 +149,7 @@ async function saveSubmission(submission) {
       await sheets.spreadsheets.values.update({
         auth: sheetsClient,
         spreadsheetId,
-range: `${sheetName}!A1:AJ1`,        valueInputOption: "RAW",
+range: `${sheetName}!A1:AL1`,        valueInputOption: "RAW",
         resource: { values: [HEADERS] },
       });
     }
