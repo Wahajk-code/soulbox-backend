@@ -20,6 +20,8 @@ const HEADERS = [
   "arc.system",
   "arc.label",
   "arc.rule_fired",
+  "desire.genre_fluidity",
+  "desire.plot_engine",
   "desire.genre_calling",
   "desire.genre_flavour",
   "desire.genre_subflavour",
@@ -43,11 +45,11 @@ const HEADERS = [
   "yearning.cluster_image",
   "yearning.final",
   "yearning.whisper_confirm",
-  // Reader context (only the four collected fields)
   "reader_context.favourite_books",
-  "reader_context.issues_struggles",
+  "reader_context.themes_issues",
   "reader_context.reading_habits",
   "reader_context.heavy_triggers",
+  "reader_context.age_stage",
 ];
 
 // Map legacy header names to the values in the flattened payload
