@@ -40,6 +40,8 @@ const HEADERS = [
 
   "desire.genre_calling",
 
+  "desire.genre_cluster",
+
   "desire.genre_flavour",
 
   "desire.genre_subflavour",
@@ -52,9 +54,13 @@ const HEADERS = [
 
   "desire.literary_depth",
 
+  "desire.literary_depth_score",
+
   "desire.plot_bias",
 
   "desire.sensitivity",
+
+  "wounds",
 
   "cultural_lens.axis_tradition_change.value",
 
@@ -63,6 +69,8 @@ const HEADERS = [
   "cultural_lens.protagonist_lens.value",
 
   "cultural_lens.aggregate",
+
+  "cultural_lens.final",
 
   "soul_climate.temperature_primary.tag",
 
@@ -94,6 +102,8 @@ const HEADERS = [
 
   "reader_context.age_stage",
 
+  "chosen_curator",
+
 ];
 
 const FALLBACK_PATHS = {
@@ -103,6 +113,8 @@ const FALLBACK_PATHS = {
   "desire.plot_engine": ["desire.plot_engine.value"],
 
   "desire.genre_calling": ["desire.genre_calling.value"],
+
+  "desire.genre_cluster": ["desire.genre_cluster.value"],
 
   "desire.genre_flavour": ["desire.genre_flavour.value"],
 
@@ -116,9 +128,13 @@ const FALLBACK_PATHS = {
 
   "desire.literary_depth": ["desire.literary_depth.value"],
 
+  "desire.literary_depth_score": ["desire.literary_depth_score.value"],
+
   "desire.plot_bias": ["desire.plot_bias.value"],
 
   "desire.sensitivity": ["desire.sensitivity.value"],
+
+  wounds: ["wounds.value", "wound", "wound.value", "soul_climate.wounds", "soul_climate.wounds.value"],
 
   "soul_climate.temperature_primary.tag": [
 
@@ -206,6 +222,8 @@ const FALLBACK_PATHS = {
 
   ],
 
+  chosen_curator: ["chosen_curator.value", "curator", "curator.value"],
+
 };
 
 function flattenObject(obj, prefix = "") {
@@ -246,6 +264,120 @@ function previewValue(value) {
 
 }
 
+function firstValue(flattened, paths) {
+
+  for (const path of paths) {
+
+    const value = flattened[path];
+
+    if (value !== undefined && value !== null && value !== "") return value;
+
+  }
+
+  return "";
+
+}
+
+function mapLiteraryDepthFromScore(score) {
+
+  const numericScore = Number(score);
+
+  if (!Number.isFinite(numericScore)) return "";
+
+  if (numericScore <= 4) return "Commercial";
+
+  if (numericScore <= 6) return "Mixed";
+
+  return "Literary";
+
+}
+
+function mapReadingStyleDepthFromScore(score) {
+
+  const numericScore = Number(score);
+
+  if (!Number.isFinite(numericScore)) return "";
+
+  if (numericScore <= 4) return "Commercial";
+
+  if (numericScore <= 7) return "Mixed";
+
+  return "Literary";
+
+}
+
+function normalizeCulturalLens(flattened) {
+
+  const culturalLens = firstValue(flattened, [
+
+    "cultural_lens.final",
+
+    "cultural_lens.value",
+
+    "cultural_lens.aggregate",
+
+    "cultural_lens",
+
+  ]);
+
+  if (!culturalLens) return "";
+
+  const normalized = String(culturalLens).trim();
+
+  if (["Progressive", "Balanced", "Traditional"].includes(normalized)) {
+
+    return normalized;
+
+  }
+
+  return normalized;
+
+}
+
+function normalizeComputedFields(flattened) {
+
+  const literaryDepthScore = firstValue(flattened, [
+
+    "desire.literary_depth_score",
+
+    "desire.literary_depth_score.value",
+
+  ]);
+
+  if (literaryDepthScore !== "") {
+
+    flattened["desire.literary_depth_score"] = literaryDepthScore;
+
+    if (!firstValue(flattened, ["desire.literary_depth", "desire.literary_depth.value"])) {
+
+      flattened["desire.literary_depth"] = mapLiteraryDepthFromScore(literaryDepthScore);
+
+    }
+
+    flattened["desire.reading_style_depth"] = mapReadingStyleDepthFromScore(literaryDepthScore);
+
+  }
+
+  const culturalLens = normalizeCulturalLens(flattened);
+
+  if (culturalLens) {
+
+    flattened["cultural_lens.final"] = culturalLens;
+
+    flattened["cultural_lens.aggregate"] = culturalLens;
+
+  }
+
+  const wounds = firstValue(flattened, FALLBACK_PATHS.wounds);
+
+  if (wounds) flattened.wounds = wounds;
+
+  const chosenCurator = firstValue(flattened, FALLBACK_PATHS.chosen_curator);
+
+  if (chosenCurator) flattened.chosen_curator = chosenCurator;
+
+}
+
 async function saveSubmission(submission) {
 
   try {
@@ -272,9 +404,9 @@ async function saveSubmission(submission) {
 
     const sheetName = "Sheet1";
 
-    const range = `${sheetName}!A:AL`;
+    const range = `${sheetName}!A:ZZ`;
 
-    const headerRange = `${sheetName}!A1:AL1`;
+    const headerRange = `${sheetName}!A1:ZZ1`;
 
     console.log("[SubmissionService] Incoming submission snapshot", {
 
@@ -294,6 +426,8 @@ async function saveSubmission(submission) {
 
     flattened.region = flattened.region || flattened.country;
 
+    normalizeComputedFields(flattened);
+
     console.log("[SubmissionService] Flattened payload keys", Object.keys(flattened));
 
     console.log("[SubmissionService] New field raw check", {
@@ -305,6 +439,16 @@ async function saveSubmission(submission) {
       "desire.plot_engine": previewValue(flattened["desire.plot_engine"]),
 
       "desire.plot_engine.value": previewValue(flattened["desire.plot_engine.value"]),
+
+      "desire.genre_cluster": previewValue(flattened["desire.genre_cluster"]),
+
+      "desire.literary_depth_score": previewValue(flattened["desire.literary_depth_score"]),
+
+      wounds: previewValue(flattened.wounds),
+
+      "cultural_lens.final": previewValue(flattened["cultural_lens.final"]),
+
+      chosen_curator: previewValue(flattened.chosen_curator),
 
       "reader_context.themes_issues": previewValue(flattened["reader_context.themes_issues"]),
 
@@ -455,6 +599,16 @@ async function saveSubmission(submission) {
       "desire.genre_fluidity": previewValue(row[HEADERS.indexOf("desire.genre_fluidity")]),
 
       "desire.plot_engine": previewValue(row[HEADERS.indexOf("desire.plot_engine")]),
+
+      "desire.genre_cluster": previewValue(row[HEADERS.indexOf("desire.genre_cluster")]),
+
+      "desire.literary_depth_score": previewValue(row[HEADERS.indexOf("desire.literary_depth_score")]),
+
+      wounds: previewValue(row[HEADERS.indexOf("wounds")]),
+
+      "cultural_lens.final": previewValue(row[HEADERS.indexOf("cultural_lens.final")]),
+
+      chosen_curator: previewValue(row[HEADERS.indexOf("chosen_curator")]),
 
       "reader_context.themes_issues": previewValue(row[HEADERS.indexOf("reader_context.themes_issues")]),
 
