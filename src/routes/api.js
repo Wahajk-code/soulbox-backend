@@ -1,18 +1,24 @@
 const express = require("express");
 const router = express.Router();
+require("dotenv").config();
 const submissionService = require("../services/submission");
 const webflowService = require("../services/webflow");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const createStripeClient = require("stripe");
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 const { google } = require("googleapis"); // ← ADD THIS LINE
-require("dotenv").config();
 const crypto = require("crypto");
 
+const stripe = process.env.STRIPE_SECRET_KEY
+  ? createStripeClient(process.env.STRIPE_SECRET_KEY)
+  : null;
+
 // Configure Mailchimp
-mailchimp.setConfig({
-  apiKey: process.env.MAILCHIMP_API_KEY,
-  server: process.env.MAILCHIMP_API_KEY.split("-")[1],
-});
+if (process.env.MAILCHIMP_API_KEY) {
+  mailchimp.setConfig({
+    apiKey: process.env.MAILCHIMP_API_KEY,
+    server: process.env.MAILCHIMP_API_KEY.split("-")[1],
+  });
+}
 const PLANS = {
   monthly: {
     type: "inline",
@@ -269,6 +275,12 @@ router.get("/soul-report/:arcLabel", async (req, res) => {
 
 router.post("/create-checkout-session", async (req, res) => {
   try {
+    if (!stripe) {
+      return res.status(500).json({
+        error: "Stripe is not configured. Set STRIPE_SECRET_KEY in Vercel.",
+      });
+    }
+
     const { plan, email, submission } = req.body;
 
     if (!PLANS[plan]) {
@@ -350,6 +362,10 @@ router.post("/create-checkout-session", async (req, res) => {
 router.post("/mailchimp-subscribe", async (req, res) => {
   try {
     const { email, tags = ["Waitlist"] } = req.body;
+    if (!process.env.MAILCHIMP_API_KEY) {
+      throw new Error("Mailchimp API key is not configured");
+    }
+
     if (
       !process.env.MAILCHIMP_AUDIENCE_ID ||
       process.env.MAILCHIMP_AUDIENCE_ID === "xxxxxxxxxx"
