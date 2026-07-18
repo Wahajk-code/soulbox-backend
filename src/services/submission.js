@@ -1,19 +1,14 @@
 const { google } = require("googleapis");
 const sheets = google.sheets("v4");
-const privateKey = "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCoCnZnuV9FKlyg\n219uUczxnVt/8cxJy0+gjSDaf2Fcpw0zfkLg6/IMI8J2e4VRSDQo8TlSfcNe+H4k\nq+xIiqh8bW+fJOZ/+Qk12bJwU8fphSrGZzIhDyd8Y3MTQub7rMrX8PmgJ/H0/LeQ\nn3I/qsnLDAdRHUbZu0cKLmD+2mGpDkxix9n6hS7n5Mx9XzzTyMKR+zFnotKhLnwo\ndSJPbDrQdkW55tvMoeBoprVJivdR/0BYzEu1ozg9CxoTsXrVtQwRD6me//GmqVI5\n18WkFbf2ODEJBw8xV6KzvHjToLe6Y8YAH1UAvhWpkw4y2xE/csSt+3CRgLFTmS1F\nvr+n7Ka/AgMBAAECggEAQd3sAIdERS+wJCso8myk6RYVjgag3VIQka2P8aVZbABc\n59C3dUN22nRP3rJXFP+41k2Lev6pzHmZtFUhZmPXXAJnbNmBcisTBaUh0O6+HxYg\nKKm9mADBKPwwWJ3yPTdDQTaHGlRd/nnqmAkvtq4CsBC0c4KGyYSjeWWphmviOOmr\nXC6up0BRCxS2d46qV4lN90cfeej+DCb9iiKhwGejnGjELlZ4U/WY0oVSc0SaM/hG\nsm8QoxhfTqW1litPLzVnVB4drFbRUsQoN9isM5qbaPxrYJAUQNHtxRs6dkDQId2W\nVVlhSxiNIOSwbEhh2DXK796aA/l8ALZx3DJMwXwJ4QKBgQDeq3LjKayo0dNIoE3L\nEhDWy9Ww4U1e+Rl3OY2dmVcpPw/S8sDrnQ4nsgTWbW1DzmGb4DL+MqKPF0AN0+2p\njf7k8FsDiFiIsenmnBM9DiNv2AB0XD8RjYUpkfRZvpOFseAtLWw48IAMepE/4f1D\nPmqUGn8ly9PbdBUTcPn2L4jY3wKBgQDBMaxsZR5W58QTyxQ5ywy6UG10rOVTKFA8\n1W5DguPu7qYoPpqNrVaJBahdBxtcD4wYsTSdeoqvPxDMo+PLHcK75fMHvIK66/5C\nH+s6sn1ZzlNbnuE0mJBzVOeufyMV/k/nV5zvUsdjiCaUo/sloVOT4ZXLiUiukShN\ncj9ol6OOIQKBgBe+GEX4j5yAoxK/ZQweJQWCPorZuzJBRWHdFSiUzSJswvcvQzrc\nSEIbTUC/8kKkouvIACfypjqzs/TFgDXwGhm3Nz0tMKOCtPoN8k80TrsCQSonG+J3\nQJeqJG/dTkWXLdwjV8LKghzShOJW6nZdFWgtWxlgnnpr6kNkbIK/lsvpAoGAcj0O\nSTZt/1OjJVUji50e1Jk0cBbAsDCZaa+HORKP97xUsl16hKZoEjQvP3sxWXm0DPHU\nO/63PTNcmrWawIPDn9o0oHF/GEruGWnIbfgXmWAg+H91ieVhHWGqcgup0pqD4zdy\njC31y0w6DBD/NFw2EK8HJcjzGo6pN0qEZjOsuiECgYBKUOMgRQH524tp4qgBeju3\n+3Lf5VI2nXTFIdOjXQxifKgSOmOw0GhzUEc2Cg+HnDEavyk05JbP1nHVdLT+Td5M\nRMF45UrSiE2mquxdwiJOiIJ8y2dMnY/K9tBlAmLXdbdFcN2vDjG45O8XxURLr0CM\nv7y0/qVvKNxzwmUPWakWuA==\n-----END PRIVATE KEY-----\n";
+const serviceAccountEmail = process.env.GOOGLE_CLIENT_EMAIL;
+
+const serviceAccountPrivateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+
 // Authenticate with Service Account
-const auth = new google.auth.GoogleAuth({
-
-  credentials: {
-
-    client_email: "soulbox@acoustic-art-478618-k3.iam.gserviceaccount.com",
-
-    private_key: privateKey,
-
-  },
-
+const auth = new google.auth.JWT({
+  email: serviceAccountEmail,
+  key: serviceAccountPrivateKey,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-
 });
 
 const HEADERS = [
@@ -134,7 +129,16 @@ const FALLBACK_PATHS = {
 
   "desire.sensitivity": ["desire.sensitivity.value"],
 
-  wounds: ["wounds.value", "wound", "wound.value", "soul_climate.wounds", "soul_climate.wounds.value"],
+  wounds: [
+    "wounds.value",
+    "wound",
+    "wound.value",
+    "soul_climate.wounds.value",
+    "wounds.label",
+    "wound.label",
+    "soul_climate.wounds",
+    "soul_climate.wounds.label",
+  ],
 
   "soul_climate.temperature_primary.tag": [
 
@@ -334,6 +338,31 @@ function normalizeCulturalLens(flattened) {
 
 }
 
+function normalizeWounds(wounds) {
+
+  if (!wounds) return "";
+
+  const normalized = String(wounds).trim();
+
+  const labels = {
+    "wounds.rejection": "Rejection",
+    "wounds.abandonment": "Abandonment",
+    "wounds.humiliation": "Humiliation",
+    "wounds.betrayal": "Betrayal",
+    "wounds.injustice": "Injustice",
+    "wounds.invisibility": "Invisibility",
+    "wounds.none": "None of these",
+  };
+
+  if (labels[normalized]) return labels[normalized];
+
+  return normalized
+    .replace(/^wounds\./, "")
+    .replace(/[_-]+/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+}
+
 function normalizeComputedFields(flattened) {
 
   const literaryDepthScore = firstValue(flattened, [
@@ -368,7 +397,7 @@ function normalizeComputedFields(flattened) {
 
   }
 
-  const wounds = firstValue(flattened, FALLBACK_PATHS.wounds);
+  const wounds = normalizeWounds(firstValue(flattened, FALLBACK_PATHS.wounds));
 
   if (wounds) flattened.wounds = wounds;
 
@@ -398,7 +427,7 @@ async function saveSubmission(submission) {
 
     }
 
-    const sheetsClient = await auth.getClient();
+    const sheetsClient = auth;
 
     const spreadsheetId = "1RxdyCRhwYKGp8-fuYlHLhxvrdQTGcGg0bW93KzAuCtk";
 
