@@ -457,9 +457,11 @@ router.get("/debug-sheets", async (req, res) => {
   // Use lower-level JWT for clearer error reporting
   let jwtClient;
   try {
-    jwtClient = new google.auth.JWT(clientEmail.trim(), null, privateKey, [
-      "https://www.googleapis.com/auth/spreadsheets",
-    ]);
+    jwtClient = new google.auth.JWT({
+      email: clientEmail.trim(),
+      key: privateKey,
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
 
     await jwtClient.authorize();
     info("✔ Authentication successful");
