@@ -130,14 +130,14 @@ const FALLBACK_PATHS = {
   "desire.sensitivity": ["desire.sensitivity.value"],
 
   wounds: [
-    "wounds.label",
     "wounds.value",
-    "wound.label",
     "wound",
     "wound.value",
-    "soul_climate.wounds.label",
-    "soul_climate.wounds",
     "soul_climate.wounds.value",
+    "wounds.label",
+    "wound.label",
+    "soul_climate.wounds",
+    "soul_climate.wounds.label",
   ],
 
   "soul_climate.temperature_primary.tag": [
