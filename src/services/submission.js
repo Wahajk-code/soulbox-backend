@@ -129,7 +129,16 @@ const FALLBACK_PATHS = {
 
   "desire.sensitivity": ["desire.sensitivity.value"],
 
-  wounds: ["wounds.value", "wound", "wound.value", "soul_climate.wounds", "soul_climate.wounds.value"],
+  wounds: [
+    "wounds.label",
+    "wounds.value",
+    "wound.label",
+    "wound",
+    "wound.value",
+    "soul_climate.wounds.label",
+    "soul_climate.wounds",
+    "soul_climate.wounds.value",
+  ],
 
   "soul_climate.temperature_primary.tag": [
 
@@ -329,6 +338,31 @@ function normalizeCulturalLens(flattened) {
 
 }
 
+function normalizeWounds(wounds) {
+
+  if (!wounds) return "";
+
+  const normalized = String(wounds).trim();
+
+  const labels = {
+    "wounds.rejection": "Rejection",
+    "wounds.abandonment": "Abandonment",
+    "wounds.humiliation": "Humiliation",
+    "wounds.betrayal": "Betrayal",
+    "wounds.injustice": "Injustice",
+    "wounds.invisibility": "Invisibility",
+    "wounds.none": "None of these",
+  };
+
+  if (labels[normalized]) return labels[normalized];
+
+  return normalized
+    .replace(/^wounds\./, "")
+    .replace(/[_-]+/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+}
+
 function normalizeComputedFields(flattened) {
 
   const literaryDepthScore = firstValue(flattened, [
@@ -363,7 +397,7 @@ function normalizeComputedFields(flattened) {
 
   }
 
-  const wounds = firstValue(flattened, FALLBACK_PATHS.wounds);
+  const wounds = normalizeWounds(firstValue(flattened, FALLBACK_PATHS.wounds));
 
   if (wounds) flattened.wounds = wounds;
 
